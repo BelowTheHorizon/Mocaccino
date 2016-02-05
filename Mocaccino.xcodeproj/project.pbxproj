@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB57DBA01C6495AD0031040E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DB9F1C6495AD0031040E /* AppDelegate.swift */; };
+		DB57DBA21C6495AD0031040E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBA11C6495AD0031040E /* ViewController.swift */; };
+		DB57DBA51C6495AD0031040E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBA31C6495AD0031040E /* Main.storyboard */; };
+		DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */; };
+		DB57DBAA1C6495AD0031040E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBA91C6495AD0031040E /* Assets.xcassets */; };
+		DB57DBAD1C6495AD0031040E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBAB1C6495AD0031040E /* LaunchScreen.storyboard */; };
+		DB57DBB81C6495AD0031040E /* MocaccinoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBB71C6495AD0031040E /* MocaccinoTests.swift */; };
+		DB57DBC31C6495AD0031040E /* MocaccinoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBC21C6495AD0031040E /* MocaccinoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DB57DBB41C6495AD0031040E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB57DB941C6495AD0031040E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB57DB9B1C6495AD0031040E;
+			remoteInfo = Mocaccino;
+		};
+		DB57DBBF1C6495AD0031040E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DB57DB941C6495AD0031040E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DB57DB9B1C6495AD0031040E;
+			remoteInfo = Mocaccino;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DB57DB9C1C6495AD0031040E /* Mocaccino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mocaccino.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB57DB9F1C6495AD0031040E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DB57DBA11C6495AD0031040E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DB57DBA41C6495AD0031040E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DB57DBA71C6495AD0031040E /* Mocaccino.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mocaccino.xcdatamodel; sourceTree = "<group>"; };
+		DB57DBA91C6495AD0031040E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DB57DBAC1C6495AD0031040E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DB57DBAE1C6495AD0031040E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB57DBB31C6495AD0031040E /* MocaccinoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MocaccinoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB57DBB71C6495AD0031040E /* MocaccinoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocaccinoTests.swift; sourceTree = "<group>"; };
+		DB57DBB91C6495AD0031040E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB57DBBE1C6495AD0031040E /* MocaccinoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MocaccinoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB57DBC21C6495AD0031040E /* MocaccinoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocaccinoUITests.swift; sourceTree = "<group>"; };
+		DB57DBC41C6495AD0031040E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB57DB991C6495AD0031040E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB57DBB01C6495AD0031040E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB57DBBB1C6495AD0031040E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB57DB931C6495AD0031040E = {
+			isa = PBXGroup;
+			children = (
+				DB57DB9E1C6495AD0031040E /* Mocaccino */,
+				DB57DBB61C6495AD0031040E /* MocaccinoTests */,
+				DB57DBC11C6495AD0031040E /* MocaccinoUITests */,
+				DB57DB9D1C6495AD0031040E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DB57DB9D1C6495AD0031040E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB57DB9C1C6495AD0031040E /* Mocaccino.app */,
+				DB57DBB31C6495AD0031040E /* MocaccinoTests.xctest */,
+				DB57DBBE1C6495AD0031040E /* MocaccinoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB57DB9E1C6495AD0031040E /* Mocaccino */ = {
+			isa = PBXGroup;
+			children = (
+				DB57DB9F1C6495AD0031040E /* AppDelegate.swift */,
+				DB57DBA11C6495AD0031040E /* ViewController.swift */,
+				DB57DBA31C6495AD0031040E /* Main.storyboard */,
+				DB57DBA91C6495AD0031040E /* Assets.xcassets */,
+				DB57DBAB1C6495AD0031040E /* LaunchScreen.storyboard */,
+				DB57DBAE1C6495AD0031040E /* Info.plist */,
+				DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */,
+			);
+			path = Mocaccino;
+			sourceTree = "<group>";
+		};
+		DB57DBB61C6495AD0031040E /* MocaccinoTests */ = {
+			isa = PBXGroup;
+			children = (
+				DB57DBB71C6495AD0031040E /* MocaccinoTests.swift */,
+				DB57DBB91C6495AD0031040E /* Info.plist */,
+			);
+			path = MocaccinoTests;
+			sourceTree = "<group>";
+		};
+		DB57DBC11C6495AD0031040E /* MocaccinoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DB57DBC21C6495AD0031040E /* MocaccinoUITests.swift */,
+				DB57DBC41C6495AD0031040E /* Info.plist */,
+			);
+			path = MocaccinoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB57DB9B1C6495AD0031040E /* Mocaccino */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB57DBC71C6495AD0031040E /* Build configuration list for PBXNativeTarget "Mocaccino" */;
+			buildPhases = (
+				DB57DB981C6495AD0031040E /* Sources */,
+				DB57DB991C6495AD0031040E /* Frameworks */,
+				DB57DB9A1C6495AD0031040E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mocaccino;
+			productName = Mocaccino;
+			productReference = DB57DB9C1C6495AD0031040E /* Mocaccino.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DB57DBB21C6495AD0031040E /* MocaccinoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB57DBCA1C6495AD0031040E /* Build configuration list for PBXNativeTarget "MocaccinoTests" */;
+			buildPhases = (
+				DB57DBAF1C6495AD0031040E /* Sources */,
+				DB57DBB01C6495AD0031040E /* Frameworks */,
+				DB57DBB11C6495AD0031040E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB57DBB51C6495AD0031040E /* PBXTargetDependency */,
+			);
+			name = MocaccinoTests;
+			productName = MocaccinoTests;
+			productReference = DB57DBB31C6495AD0031040E /* MocaccinoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DB57DBBD1C6495AD0031040E /* MocaccinoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB57DBCD1C6495AD0031040E /* Build configuration list for PBXNativeTarget "MocaccinoUITests" */;
+			buildPhases = (
+				DB57DBBA1C6495AD0031040E /* Sources */,
+				DB57DBBB1C6495AD0031040E /* Frameworks */,
+				DB57DBBC1C6495AD0031040E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DB57DBC01C6495AD0031040E /* PBXTargetDependency */,
+			);
+			name = MocaccinoUITests;
+			productName = MocaccinoUITests;
+			productReference = DB57DBBE1C6495AD0031040E /* MocaccinoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB57DB941C6495AD0031040E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Cirno MainasuK";
+				TargetAttributes = {
+					DB57DB9B1C6495AD0031040E = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					DB57DBB21C6495AD0031040E = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = DB57DB9B1C6495AD0031040E;
+					};
+					DB57DBBD1C6495AD0031040E = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = DB57DB9B1C6495AD0031040E;
+					};
+				};
+			};
+			buildConfigurationList = DB57DB971C6495AD0031040E /* Build configuration list for PBXProject "Mocaccino" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DB57DB931C6495AD0031040E;
+			productRefGroup = DB57DB9D1C6495AD0031040E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB57DB9B1C6495AD0031040E /* Mocaccino */,
+				DB57DBB21C6495AD0031040E /* MocaccinoTests */,
+				DB57DBBD1C6495AD0031040E /* MocaccinoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DB57DB9A1C6495AD0031040E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB57DBAD1C6495AD0031040E /* LaunchScreen.storyboard in Resources */,
+				DB57DBAA1C6495AD0031040E /* Assets.xcassets in Resources */,
+				DB57DBA51C6495AD0031040E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB57DBB11C6495AD0031040E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB57DBBC1C6495AD0031040E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB57DB981C6495AD0031040E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB57DBA21C6495AD0031040E /* ViewController.swift in Sources */,
+				DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */,
+				DB57DBA01C6495AD0031040E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB57DBAF1C6495AD0031040E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB57DBB81C6495AD0031040E /* MocaccinoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB57DBBA1C6495AD0031040E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB57DBC31C6495AD0031040E /* MocaccinoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DB57DBB51C6495AD0031040E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB57DB9B1C6495AD0031040E /* Mocaccino */;
+			targetProxy = DB57DBB41C6495AD0031040E /* PBXContainerItemProxy */;
+		};
+		DB57DBC01C6495AD0031040E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DB57DB9B1C6495AD0031040E /* Mocaccino */;
+			targetProxy = DB57DBBF1C6495AD0031040E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DB57DBA31C6495AD0031040E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB57DBA41C6495AD0031040E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DB57DBAB1C6495AD0031040E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DB57DBAC1C6495AD0031040E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DB57DBC51C6495AD0031040E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DB57DBC61C6495AD0031040E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DB57DBC81C6495AD0031040E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Mocaccino/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.Mocaccino;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DB57DBC91C6495AD0031040E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Mocaccino/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.Mocaccino;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DB57DBCB1C6495AD0031040E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MocaccinoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.MocaccinoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mocaccino.app/Mocaccino";
+			};
+			name = Debug;
+		};
+		DB57DBCC1C6495AD0031040E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MocaccinoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.MocaccinoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mocaccino.app/Mocaccino";
+			};
+			name = Release;
+		};
+		DB57DBCE1C6495AD0031040E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MocaccinoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.MocaccinoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Mocaccino;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		DB57DBCF1C6495AD0031040E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MocaccinoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.MocaccinoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Mocaccino;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB57DB971C6495AD0031040E /* Build configuration list for PBXProject "Mocaccino" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB57DBC51C6495AD0031040E /* Debug */,
+				DB57DBC61C6495AD0031040E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB57DBC71C6495AD0031040E /* Build configuration list for PBXNativeTarget "Mocaccino" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB57DBC81C6495AD0031040E /* Debug */,
+				DB57DBC91C6495AD0031040E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DB57DBCA1C6495AD0031040E /* Build configuration list for PBXNativeTarget "MocaccinoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB57DBCB1C6495AD0031040E /* Debug */,
+				DB57DBCC1C6495AD0031040E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DB57DBCD1C6495AD0031040E /* Build configuration list for PBXNativeTarget "MocaccinoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB57DBCE1C6495AD0031040E /* Debug */,
+				DB57DBCF1C6495AD0031040E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB57DBA71C6495AD0031040E /* Mocaccino.xcdatamodel */,
+			);
+			currentVersion = DB57DBA71C6495AD0031040E /* Mocaccino.xcdatamodel */;
+			path = Mocaccino.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DB57DB941C6495AD0031040E /* Project object */;
+}
