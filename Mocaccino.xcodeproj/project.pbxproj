@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		DB57DBA01C6495AD0031040E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DB9F1C6495AD0031040E /* AppDelegate.swift */; };
-		DB57DBA21C6495AD0031040E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBA11C6495AD0031040E /* ViewController.swift */; };
 		DB57DBA51C6495AD0031040E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBA31C6495AD0031040E /* Main.storyboard */; };
 		DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */; };
 		DB57DBAA1C6495AD0031040E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBA91C6495AD0031040E /* Assets.xcassets */; };
 		DB57DBAD1C6495AD0031040E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBAB1C6495AD0031040E /* LaunchScreen.storyboard */; };
 		DB57DBB81C6495AD0031040E /* MocaccinoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBB71C6495AD0031040E /* MocaccinoTests.swift */; };
 		DB57DBC31C6495AD0031040E /* MocaccinoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBC21C6495AD0031040E /* MocaccinoUITests.swift */; };
+		DB57DBD21C6499E80031040E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB57DBD11C6499E80031040E /* CloudKit.framework */; };
+		DB57DBD41C649B200031040E /* WordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBD31C649B200031040E /* WordListViewController.swift */; };
+		DB57DBD61C649C940031040E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBD51C649C940031040E /* CoreDataStack.swift */; };
+		DB57DBD91C64AB6B0031040E /* Card+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBD71C64AB6B0031040E /* Card+CoreDataProperties.swift */; };
+		DB57DBDA1C64AB6B0031040E /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBD81C64AB6B0031040E /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +41,6 @@
 /* Begin PBXFileReference section */
 		DB57DB9C1C6495AD0031040E /* Mocaccino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mocaccino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB57DB9F1C6495AD0031040E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DB57DBA11C6495AD0031040E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DB57DBA41C6495AD0031040E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DB57DBA71C6495AD0031040E /* Mocaccino.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mocaccino.xcdatamodel; sourceTree = "<group>"; };
 		DB57DBA91C6495AD0031040E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +52,12 @@
 		DB57DBBE1C6495AD0031040E /* MocaccinoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MocaccinoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB57DBC21C6495AD0031040E /* MocaccinoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocaccinoUITests.swift; sourceTree = "<group>"; };
 		DB57DBC41C6495AD0031040E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DB57DBD01C6499160031040E /* Mocaccino.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Mocaccino.entitlements; sourceTree = "<group>"; };
+		DB57DBD11C6499E80031040E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		DB57DBD31C649B200031040E /* WordListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordListViewController.swift; sourceTree = "<group>"; };
+		DB57DBD51C649C940031040E /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DB57DBD71C64AB6B0031040E /* Card+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Card+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DB57DBD81C64AB6B0031040E /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB57DBD21C6499E80031040E /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +92,7 @@
 				DB57DB9E1C6495AD0031040E /* Mocaccino */,
 				DB57DBB61C6495AD0031040E /* MocaccinoTests */,
 				DB57DBC11C6495AD0031040E /* MocaccinoUITests */,
+				DB57DBD11C6499E80031040E /* CloudKit.framework */,
 				DB57DB9D1C6495AD0031040E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,13 +110,10 @@
 		DB57DB9E1C6495AD0031040E /* Mocaccino */ = {
 			isa = PBXGroup;
 			children = (
-				DB57DB9F1C6495AD0031040E /* AppDelegate.swift */,
-				DB57DBA11C6495AD0031040E /* ViewController.swift */,
 				DB57DBA31C6495AD0031040E /* Main.storyboard */,
-				DB57DBA91C6495AD0031040E /* Assets.xcassets */,
-				DB57DBAB1C6495AD0031040E /* LaunchScreen.storyboard */,
-				DB57DBAE1C6495AD0031040E /* Info.plist */,
-				DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */,
+				DB57DBD31C649B200031040E /* WordListViewController.swift */,
+				DB57DBDB1C64C3360031040E /* CoreData */,
+				DB57DBDC1C64C3470031040E /* Supporting Files */,
 			);
 			path = Mocaccino;
 			sourceTree = "<group>";
@@ -126,6 +134,29 @@
 				DB57DBC41C6495AD0031040E /* Info.plist */,
 			);
 			path = MocaccinoUITests;
+			sourceTree = "<group>";
+		};
+		DB57DBDB1C64C3360031040E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DB57DBD71C64AB6B0031040E /* Card+CoreDataProperties.swift */,
+				DB57DBD81C64AB6B0031040E /* Card.swift */,
+				DB57DBD51C649C940031040E /* CoreDataStack.swift */,
+				DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		DB57DBDC1C64C3470031040E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB57DB9F1C6495AD0031040E /* AppDelegate.swift */,
+				DB57DBA91C6495AD0031040E /* Assets.xcassets */,
+				DB57DBD01C6499160031040E /* Mocaccino.entitlements */,
+				DB57DBAB1C6495AD0031040E /* LaunchScreen.storyboard */,
+				DB57DBAE1C6495AD0031040E /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +228,11 @@
 					DB57DB9B1C6495AD0031040E = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = Z68BDSMP42;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					DB57DBB21C6495AD0031040E = {
 						CreatedOnToolsVersion = 7.2;
@@ -260,9 +296,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB57DBA21C6495AD0031040E /* ViewController.swift in Sources */,
 				DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */,
+				DB57DBDA1C64AB6B0031040E /* Card.swift in Sources */,
+				DB57DBD91C64AB6B0031040E /* Card+CoreDataProperties.swift in Sources */,
+				DB57DBD41C649B200031040E /* WordListViewController.swift in Sources */,
 				DB57DBA01C6495AD0031040E /* AppDelegate.swift in Sources */,
+				DB57DBD61C649C940031040E /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -392,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -404,12 +443,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mocaccino/Mocaccino.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mocaccino/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.Mocaccino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -417,12 +459,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Mocaccino/Mocaccino.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mocaccino/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mainasuk.Mocaccino;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -493,6 +538,7 @@
 				DB57DBC91C6495AD0031040E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB57DBCA1C6495AD0031040E /* Build configuration list for PBXNativeTarget "MocaccinoTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +547,7 @@
 				DB57DBCC1C6495AD0031040E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB57DBCD1C6495AD0031040E /* Build configuration list for PBXNativeTarget "MocaccinoUITests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +556,7 @@
 				DB57DBCF1C6495AD0031040E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
