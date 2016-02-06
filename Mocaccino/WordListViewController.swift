@@ -16,10 +16,14 @@ class WordListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var coreDataStack: CoreDataStack!
     var fetchedResultsController: NSFetchedResultsController!
-    
+    var isActive: Bool = false {
+        willSet {
+            self.navigationItem.rightBarButtonItem?.enabled = (newValue == true) ? true : false
+        }
+    }
     
     @IBAction func addButtonPressed(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Secret Team", message: "Add a new team", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "New card", message: "Add a new flashcard", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
             
             textField.placeholder = "Type a word…"
@@ -60,7 +64,10 @@ class WordListViewController: UIViewController {
         let titleSort = NSSortDescriptor(key: "timeStamp", ascending: false)
         
         fetchRequest.sortDescriptors = [titleSort]
-        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataStack.context, sectionNameKeyPath: nil, cacheName: "Mocaccino")
+        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                   managedObjectContext: self.coreDataStack.context,
+                                                                   sectionNameKeyPath: nil,
+                                                                   cacheName: "Mocaccino")
         self.fetchedResultsController.delegate = self
         
         do {
@@ -132,7 +139,14 @@ class WordListViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let card = fetchedResultsController.objectAtIndexPath(indexPath) as! Card
+        cell.textLabel!.text = card.title
+        cell.detailTextLabel!.text = card.paraphrase
+    }
+    
+    
 }
 
 // MARK: - iCloud observer
@@ -140,14 +154,11 @@ class WordListViewController: UIViewController {
 extension WordListViewController {
     func persistentStoreDidChange () {
         NSLog("persistenStore did change")
-        self.tableView.reloadData()
     }
     
     func persistentStoreWillChange (notification:NSNotification) {
         NSLog("persistenStore will change")
         
-        // disable the UI
-        self.navigationItem.rightBarButtonItem?.enabled = false
         let moc = coreDataStack.context
         moc.performBlock { () -> Void in
             if moc.hasChanges {
@@ -161,7 +172,6 @@ extension WordListViewController {
         let moc = coreDataStack.context
         moc.performBlock { () -> Void in
             moc.mergeChangesFromContextDidSaveNotification(notification)
-            self.tableView.reloadData()
         }
     }
 }
@@ -179,11 +189,8 @@ extension WordListViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: kWordCellReuseIdentifier)
-        
-        let card = fetchedResultsController.objectAtIndexPath(indexPath) as! Card
-        cell.textLabel!.text = card.title
-        cell.detailTextLabel!.text = card.paraphrase
+        let cell = tableView.dequeueReusableCellWithIdentifier(kWordCellReuseIdentifier, forIndexPath: indexPath)
+        configureCell(cell, atIndexPath: indexPath)
         
         return cell
     }
@@ -194,6 +201,10 @@ extension WordListViewController: UITableViewDataSource {
 extension WordListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .Delete
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -217,6 +228,7 @@ extension WordListViewController: UITableViewDelegate {
 extension WordListViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
+        self.isActive = false
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
@@ -250,5 +262,6 @@ extension WordListViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
+        self.isActive = true
     }
 }

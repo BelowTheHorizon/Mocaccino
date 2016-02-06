@@ -12,6 +12,7 @@ class CoreDataStack {
     var modelName: String
     var storeName: String
     var options: [NSObject : AnyObject]? = nil
+    var finaliCloudURL: NSURL?
     
     init(modelName: String, storeName: String, options: ([NSObject : AnyObject])?) {
         self.modelName = modelName
@@ -32,10 +33,11 @@ class CoreDataStack {
     
     private lazy var psc: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.modelName)
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.modelName + ".sqlite")
         
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: self.options)
+            let store: NSPersistentStore = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: self.options)
+            self.finaliCloudURL = store.URL
         } catch {
             print("Error adding persistent stroe.")
         }
