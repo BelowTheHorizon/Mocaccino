@@ -14,6 +14,8 @@ private let kWordCellReuseIdentifier = "wordCellReuseIdentifier"
 class WordListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cardDetailViewController: UIView!
+    
     var coreDataStack: CoreDataStack!
     var fetchedResultsController: NSFetchedResultsController!
     var isActive: Bool = false {
@@ -62,8 +64,17 @@ class WordListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBarHidden = true
+        
         self.setupFetchedResultsController()
         self.refetchData()
+        
+        self.tableView.scrollIndicatorInsets.bottom += self.cardDetailViewController.frame.height - 5.0
+        self.tableView.contentInset.bottom = self.cardDetailViewController.frame.height - 5.0
+
+        self.view.backgroundColor = UIColor.blackColor()
+        self.tableView.backgroundColor = UIColor.blackColor()
+        self.tableView.tableFooterView = UIView()
         
         NSNotificationCenter.defaultCenter().addObserver(self,
             selector: "persistentStoreDidChange:",
@@ -125,6 +136,10 @@ class WordListViewController: UIViewController {
 
             presentViewController(alert, animated: true, completion: nil)
         }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     /*

@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     lazy var coreDataStack: CoreDataStack = {
         let options = [NSPersistentStoreUbiquitousContentNameKey : "Mocaccino",
                        NSMigratePersistentStoresAutomaticallyOption : true,

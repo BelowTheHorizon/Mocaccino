@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DB3B79C61C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB3B79C51C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel */; };
+		DB3B79C81C6734F2007A35B2 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B79C71C6734F2007A35B2 /* CardDetailViewController.swift */; };
 		DB57DBA01C6495AD0031040E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DB9F1C6495AD0031040E /* AppDelegate.swift */; };
 		DB57DBA51C6495AD0031040E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBA31C6495AD0031040E /* Main.storyboard */; };
 		DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		DB3B79C41C66E2A1007A35B2 /* Mocaccino_Version_0.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mocaccino_Version_0.1.0.xcdatamodel; sourceTree = "<group>"; };
 		DB3B79C51C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = ModelToModel_Version_0.1.0.xcmappingmodel; path = ModelMapping/ModelToModel_Version_0.1.0.xcmappingmodel; sourceTree = "<group>"; };
+		DB3B79C71C6734F2007A35B2 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		DB57DB9C1C6495AD0031040E /* Mocaccino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mocaccino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB57DB9F1C6495AD0031040E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB57DBA41C6495AD0031040E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				DB57DBA31C6495AD0031040E /* Main.storyboard */,
 				DB57DBD31C649B200031040E /* WordListViewController.swift */,
+				DB3B79C71C6734F2007A35B2 /* CardDetailViewController.swift */,
 				DB57DBDB1C64C3360031040E /* CoreData */,
 				DB57DBDC1C64C3470031040E /* Supporting Files */,
 			);
@@ -305,6 +308,7 @@
 				DB57DBDA1C64AB6B0031040E /* Card.swift in Sources */,
 				DB57DBD91C64AB6B0031040E /* Card+CoreDataProperties.swift in Sources */,
 				DB57DBD41C649B200031040E /* WordListViewController.swift in Sources */,
+				DB3B79C81C6734F2007A35B2 /* CardDetailViewController.swift in Sources */,
 				DB57DBA01C6495AD0031040E /* AppDelegate.swift in Sources */,
 				DB57DBD61C649C940031040E /* CoreDataStack.swift in Sources */,
 			);

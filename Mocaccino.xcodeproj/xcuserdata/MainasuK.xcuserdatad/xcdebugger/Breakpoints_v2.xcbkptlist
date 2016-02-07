@@ -35,11 +35,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/WordListViewController.swift"
-            timestampString = "476456329.665901"
+            timestampString = "476525898.375215"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "WordListViewController"
             landmarkType = "3">
             <Actions>
