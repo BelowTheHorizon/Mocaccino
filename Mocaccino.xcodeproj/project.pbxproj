@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB3B79C61C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = DB3B79C51C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel */; };
 		DB57DBA01C6495AD0031040E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57DB9F1C6495AD0031040E /* AppDelegate.swift */; };
 		DB57DBA51C6495AD0031040E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB57DBA31C6495AD0031040E /* Main.storyboard */; };
 		DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB3B79C41C66E2A1007A35B2 /* Mocaccino_Version_0.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mocaccino_Version_0.1.0.xcdatamodel; sourceTree = "<group>"; };
+		DB3B79C51C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = ModelToModel_Version_0.1.0.xcmappingmodel; path = ModelMapping/ModelToModel_Version_0.1.0.xcmappingmodel; sourceTree = "<group>"; };
 		DB57DB9C1C6495AD0031040E /* Mocaccino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mocaccino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB57DB9F1C6495AD0031040E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DB57DBA41C6495AD0031040E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 				DB57DBD81C64AB6B0031040E /* Card.swift */,
 				DB57DBD51C649C940031040E /* CoreDataStack.swift */,
 				DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */,
+				DB3B79C51C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -297,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */,
+				DB3B79C61C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel in Sources */,
 				DB57DBDA1C64AB6B0031040E /* Card.swift in Sources */,
 				DB57DBD91C64AB6B0031040E /* Card+CoreDataProperties.swift in Sources */,
 				DB57DBD41C649B200031040E /* WordListViewController.swift in Sources */,
@@ -564,9 +569,10 @@
 		DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DB3B79C41C66E2A1007A35B2 /* Mocaccino_Version_0.1.0.xcdatamodel */,
 				DB57DBA71C6495AD0031040E /* Mocaccino.xcdatamodel */,
 			);
-			currentVersion = DB57DBA71C6495AD0031040E /* Mocaccino.xcdatamodel */;
+			currentVersion = DB3B79C41C66E2A1007A35B2 /* Mocaccino_Version_0.1.0.xcdatamodel */;
 			path = Mocaccino.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

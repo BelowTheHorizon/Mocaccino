@@ -44,7 +44,7 @@ class WordListViewController: UIViewController {
             let definitionTextField = alert.textFields!.last
             
             card.title = wordTextField!.text
-            card.paraphrase = definitionTextField!.text
+            card.definition = definitionTextField!.text
             card.timeStamp = NSDate()
             
             self.coreDataStack.saveContext()
@@ -57,29 +57,26 @@ class WordListViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    // MARK: View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let fetchRequest = NSFetchRequest(entityName: "Card")
-        let titleSort = NSSortDescriptor(key: "timeStamp", ascending: false)
+        self.setupFetchedResultsController()
+        self.refetchData()
         
-        fetchRequest.sortDescriptors = [titleSort]
-        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                   managedObjectContext: self.coreDataStack.context,
-                                                                   sectionNameKeyPath: nil,
-                                                                   cacheName: "Mocaccino")
-        self.fetchedResultsController.delegate = self
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("Error: \(error.localizedDescription)")
-        }
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "persistentStoreDidChange", name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "persistentStoreWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.context.persistentStoreCoordinator)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "recieveICloudChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context.persistentStoreCoordinator)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "persistentStoreDidChange:",
+            name: NSPersistentStoreCoordinatorStoresDidChangeNotification,
+            object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "persistentStoreWillChange:",
+            name: NSPersistentStoreCoordinatorStoresWillChangeNotification,
+            object: self.coreDataStack.context.persistentStoreCoordinator)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "recieveICloudChanges:",
+            name: NSPersistentStoreDidImportUbiquitousContentChangesNotification,
+            object: self.coreDataStack.context.persistentStoreCoordinator)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -143,33 +140,84 @@ class WordListViewController: UIViewController {
     private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let card = fetchedResultsController.objectAtIndexPath(indexPath) as! Card
         cell.textLabel!.text = card.title
-        cell.detailTextLabel!.text = card.paraphrase
+        cell.detailTextLabel!.text = card.definition
     }
     
+    private func setupFetchedResultsController() {
+        let fetchRequest = NSFetchRequest(entityName: "Card")
+        let titleSort = NSSortDescriptor(key: "timeStamp", ascending: false)
+        fetchRequest.sortDescriptors = [titleSort]
+        
+        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                   managedObjectContext: self.coreDataStack.context,
+                                                                   sectionNameKeyPath: nil,
+                                                                   cacheName: "Mocaccino")
+        self.fetchedResultsController.delegate = self
+    }
     
+    private func refetchData() {
+        do {
+            NSLog("Try to refetch data")
+            try self.fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: - iCloud observer
 
 extension WordListViewController {
-    func persistentStoreDidChange () {
-        NSLog("persistenStore did change")
+    func persistentStoreDidChange (notification: NSNotification) {
+        NSLog("PersistenStore did change")
+        
+        if let userInfo = notification.userInfo,
+        let transitionType = userInfo[NSPersistentStoreUbiquitousTransitionTypeKey] as? NSNumber {
+            switch transitionType {
+            case NSPersistentStoreUbiquitousTransitionType.AccountAdded.rawValue: break
+            case NSPersistentStoreUbiquitousTransitionType.AccountRemoved.rawValue: break
+            case NSPersistentStoreUbiquitousTransitionType.ContentRemoved.rawValue: break
+            case NSPersistentStoreUbiquitousTransitionType.InitialImportCompleted.rawValue: break
+                
+            default:
+                break
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.refetchData()
+            self.tableView.reloadData()
+            self.isActive = true
+        }
     }
     
     func persistentStoreWillChange (notification:NSNotification) {
-        NSLog("persistenStore will change")
+        NSLog("PersistenStore will change")
         
-        let moc = coreDataStack.context
-        moc.performBlock { () -> Void in
-            if moc.hasChanges {
-                self.coreDataStack.saveContext()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            let moc = self.fetchedResultsController.managedObjectContext
+            
+            // Disable user interface with setEnabled: or an overlay
+            self.isActive = false
+            
+            moc.performBlock { () -> Void in
+                if moc.hasChanges {
+                    do {
+                        try moc.save()
+                    } catch {
+                        print("Could not save changes")
+                    }
+                } else {
+                    // Drop any managed object references
+                    moc.reset()
+                }
             }
-        }
+        }   // dispatch_async(…) { }
     }
     
     func recieveICloudChanges (notification:NSNotification){
         NSLog("Recieve iCloud change")
-        let moc = coreDataStack.context
+        let moc = self.fetchedResultsController.managedObjectContext
         moc.performBlock { () -> Void in
             moc.mergeChangesFromContextDidSaveNotification(notification)
         }
@@ -200,7 +248,7 @@ extension WordListViewController: UITableViewDataSource {
 
 extension WordListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        return self.isActive
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {

@@ -15,7 +15,7 @@ import CoreData
 extension Card {
 
     @NSManaged var title: String?
-    @NSManaged var paraphrase: String?
+    @NSManaged var definition: String?
     @NSManaged var timeStamp: NSDate?
 
 }
