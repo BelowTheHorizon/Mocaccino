@@ -33,7 +33,7 @@ class CoreDataStack {
     
     private lazy var psc: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.modelName + ".sqlite")
+        let url = self.finaliCloudURL ?? self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.modelName + ".sqlite")
         
         do {
             let store: NSPersistentStore = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: self.options)
