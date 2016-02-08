@@ -56,6 +56,10 @@ class RootViewController: UIViewController {
         self.currentSizeClasses = (newCollection.horizontalSizeClass, newCollection.verticalSizeClass)
     }
     
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        self.cardListViewController.motionEnded(motion, withEvent: event)
+    }
+    
     // MARK: Private function
     
     private func initSubView() {
@@ -66,7 +70,6 @@ class RootViewController: UIViewController {
         
         // Init CardDetailViewController
         self.cardDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CardDetailViewController") as! CardDetailViewController
-//        self.cardDetailViewController.view.layer.anchorPoint = CGPoint(x: 1.0, y: 1.0)
     }
     
     private func setLayoutOfSubView(size: CGSize? = nil) {
@@ -116,6 +119,8 @@ class RootViewController: UIViewController {
         self.cardListViewController.view.frame = frameRect
         self.cardDetailViewController.view.frame = cardDetailFrameRect
         
+        self.cardListViewController.tableView.scrollIndicatorInsets.bottom += cardDetailFrameRect.height
+        self.cardListViewController.tableView.contentInset.bottom = cardDetailFrameRect.height
         self.cardListViewController.view.hidden = false
     }
     
@@ -129,7 +134,9 @@ class RootViewController: UIViewController {
         self.navigationController_CardListViewController.view.frame = sliceRect
         self.cardListViewController.view.frame = sliceRect
         self.cardDetailViewController.view.frame = remainderRect
-        
+
+        self.cardListViewController.tableView.scrollIndicatorInsets = UIEdgeInsetsZero
+        self.cardListViewController.tableView.contentInset = UIEdgeInsetsZero
         self.cardListViewController.view.hidden = false
     }
     
@@ -141,6 +148,8 @@ class RootViewController: UIViewController {
         self.cardListViewController.view.frame = frameRect
         self.cardDetailViewController.view.frame = frameRect
         
+        self.cardListViewController.tableView.scrollIndicatorInsets = UIEdgeInsetsZero
+        self.cardListViewController.tableView.contentInset = UIEdgeInsetsZero
         self.cardListViewController.view.hidden = true
     }
     

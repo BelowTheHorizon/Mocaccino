@@ -19,19 +19,15 @@ class CardListViewController: UIViewController {
     var fetchedResultsController: NSFetchedResultsController!
     var isActive: Bool = false {
         willSet {
-            self.navigationItem.rightBarButtonItem?.enabled = (newValue == true) ? true : false
+//            self.navigationItem.rightBarButtonItem?.enabled = (newValue == true) ? true : false
         }
     }
     
     @IBAction func addButtonPressed(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "New card", message: "Add a new flashcard", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "New Deck", message: "Add a new deck", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
             
-            textField.placeholder = "Type a word…"
-        }
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
-            
-            textField.placeholder = "Type definition(s)…"
+            textField.placeholder = "Deck name…"
         }
         
         alert.addAction(UIAlertAction(title: "Save", style: .Default, handler: { (action: UIAlertAction) -> Void in
@@ -39,14 +35,12 @@ class CardListViewController: UIViewController {
             print("Saved")
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
-            let card = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Card
+            let deck = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Deck
 
-            let wordTextField = alert.textFields!.first
-            let definitionTextField = alert.textFields!.last
+            let deckNameTextField = alert.textFields!.first
             
-            card.title = wordTextField!.text
-            card.definition = definitionTextField!.text
-            card.timeStamp = NSDate()
+            deck.name = deckNameTextField!.text
+            deck.timeStamp = NSDate()
             
             self.coreDataStack.saveContext()
         }))
@@ -68,7 +62,6 @@ class CardListViewController: UIViewController {
         self.setupFetchedResultsController()
         self.refetchData()
         
-
         self.view.backgroundColor = UIColor.blackColor()
         self.tableView.backgroundColor = UIColor.blackColor()
         self.tableView.tableFooterView = UIView()
@@ -103,6 +96,9 @@ class CardListViewController: UIViewController {
     // MARK: - UIResponder
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        
+        self.addButtonPressed(UIBarButtonItem())
+        return
 
         if #available(iOS 9.0, *) {
             if motion != .MotionShake { return }
@@ -137,20 +133,21 @@ class CardListViewController: UIViewController {
     
     
     private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let card = fetchedResultsController.objectAtIndexPath(indexPath) as! Card
-        cell.textLabel!.text = card.title
-        cell.detailTextLabel!.text = card.definition
+        let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
+        cell.textLabel!.text = deck.name
+        let cardsCount = deck.cards?.count ?? 0
+        cell.detailTextLabel!.text = (cardsCount == 0) ? "\(cardsCount) card" : "\(cardsCount) cards"
     }
     
     private func setupFetchedResultsController() {
-        let fetchRequest = NSFetchRequest(entityName: "Card")
+        let fetchRequest = NSFetchRequest(entityName: "Deck")
         let titleSort = NSSortDescriptor(key: "timeStamp", ascending: false)
         fetchRequest.sortDescriptors = [titleSort]
         
         self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: self.coreDataStack.context,
                                                                    sectionNameKeyPath: nil,
-                                                                   cacheName: "Mocaccino")
+                                                                   cacheName: "MocaccinoDeck")
         self.fetchedResultsController.delegate = self
     }
     

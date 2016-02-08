@@ -14,7 +14,6 @@ class CardDetailViewController: UIViewController {
     
     var visualEffectView: UIVisualEffectView!
     
-
     @IBAction func addCardButtonPressed(sender: UIButton) {
         NSLog("Add card button pressed")
     }
@@ -35,7 +34,6 @@ class CardDetailViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         self.visualEffectView.frame = self.view.bounds
-        print(self.view.bounds)
     }
 
     override func didReceiveMemoryWarning() {
