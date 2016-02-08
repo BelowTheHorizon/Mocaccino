@@ -22,10 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-        let navigationController = window!.rootViewController as! UINavigationController
-        let viewController = navigationController.topViewController as! WordListViewController
-        viewController.coreDataStack = coreDataStack
+        
+        application.statusBarStyle = .LightContent
+        
+        let rootViewController = window!.rootViewController as! RootViewController
+        rootViewController.coreDataStack = self.coreDataStack
         return true
     }
 
@@ -53,7 +54,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         coreDataStack.saveContext()
     }
-
-
 }
 

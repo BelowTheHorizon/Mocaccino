@@ -1,5 +1,5 @@
 //
-//  WordListViewController.swift
+//  CardListViewController.swift
 //  Mocaccino
 //
 //  Created by Cirno MainasuK on 2016-2-5.
@@ -11,10 +11,9 @@ import CoreData
 
 private let kWordCellReuseIdentifier = "wordCellReuseIdentifier"
 
-class WordListViewController: UIViewController {
+class CardListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var cardDetailViewController: UIView!
     
     var coreDataStack: CoreDataStack!
     var fetchedResultsController: NSFetchedResultsController!
@@ -69,8 +68,6 @@ class WordListViewController: UIViewController {
         self.setupFetchedResultsController()
         self.refetchData()
         
-        self.tableView.scrollIndicatorInsets.bottom += self.cardDetailViewController.frame.height - 5.0
-        self.tableView.contentInset.bottom = self.cardDetailViewController.frame.height - 5.0
 
         self.view.backgroundColor = UIColor.blackColor()
         self.tableView.backgroundColor = UIColor.blackColor()
@@ -138,19 +135,6 @@ class WordListViewController: UIViewController {
         }
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let card = fetchedResultsController.objectAtIndexPath(indexPath) as! Card
@@ -182,7 +166,7 @@ class WordListViewController: UIViewController {
 
 // MARK: - iCloud observer
 
-extension WordListViewController {
+extension CardListViewController {
     func persistentStoreDidChange (notification: NSNotification) {
         NSLog("PersistenStore did change")
         
@@ -241,7 +225,7 @@ extension WordListViewController {
 
 // MARK: - UITableViewDataSource
 
-extension WordListViewController: UITableViewDataSource {
+extension CardListViewController: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections!.count
@@ -261,7 +245,7 @@ extension WordListViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension WordListViewController: UITableViewDelegate {
+extension CardListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return self.isActive
     }
@@ -288,7 +272,7 @@ extension WordListViewController: UITableViewDelegate {
 
 // MARK: - NSFetchedResultsControllerDelegate
 
-extension WordListViewController: NSFetchedResultsControllerDelegate {
+extension CardListViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
         self.isActive = false
