@@ -1,5 +1,5 @@
 //
-//  Card+CoreDataProperties.swift
+//  Deck+CoreDataProperties.swift
 //  Mocaccino
 //
 //  Created by Cirno MainasuK on 2016-2-8.
@@ -12,14 +12,10 @@
 import Foundation
 import CoreData
 
-extension Card {
+extension Deck {
 
-    @NSManaged var currentPeriod: NSNumber?
-    @NSManaged var definition: String?
-    @NSManaged var nextReviewTime: NSDate?
+    @NSManaged var name: String?
     @NSManaged var timeStamp: NSDate?
-    @NSManaged var title: String?
-    @NSManaged var memoryScore: NSNumber?
-    @NSManaged var deck: Deck?
+    @NSManaged var cards: NSSet?
 
 }

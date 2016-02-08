@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zqg-P6-LK7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vf4-Nw-Xtn">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Word List View Controller-->
+        <!--Card List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WordListViewController" customModule="Mocaccino" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardListViewController" id="BYZ-38-t0r" customClass="CardListViewController" customModule="Mocaccino" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -17,12 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4hH-d9-hIp">
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4hH-d9-hIp">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="wordCellReuseIdentifier" textLabel="JuW-JQ-15W" detailTextLabel="xcX-yd-qVl" style="IBUITableViewCellStyleSubtitle" id="1YA-g4-sGW">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1YA-g4-sGW" id="X3P-3x-YSC">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -32,18 +34,19 @@
                                                     <rect key="frame" x="15" y="5" width="32" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xcX-yd-qVl">
                                                     <rect key="frame" x="15" y="25" width="31" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -52,33 +55,46 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4hH-d9-hIp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Any-jD-Pvs"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4hH-d9-hIp" secondAttribute="bottom" id="hYf-lI-XuQ"/>
                             <constraint firstAttribute="trailing" secondItem="4hH-d9-hIp" secondAttribute="trailing" id="jKs-aD-Lem"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4hH-d9-hIp" secondAttribute="bottom" id="jeR-cV-j2x"/>
                             <constraint firstItem="4hH-d9-hIp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wVc-o8-AFV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="a2J-Mu-4SD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UDM-x8-oKM">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="ufu-Pi-AvW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="a2J-Mu-4SD"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="4hH-d9-hIp" id="wAT-Rm-ndu"/>
+                        <outlet property="tableView" destination="4hH-d9-hIp" id="9jd-TW-eSL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1117" y="477"/>
+            <point key="canvasLocation" x="1014" y="541"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="bQI-nR-6mk">
+            <objects>
+                <viewController id="vf4-Nw-Xtn" customClass="RootViewController" customModule="Mocaccino" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qNP-UH-BqM"/>
+                        <viewControllerLayoutGuide type="bottom" id="ICq-XW-TKt"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="uiA-Fb-3bj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rda-Z2-s2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="306" y="-332"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7gE-uC-S0o">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zqg-P6-LK7" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController-CardListViewController" automaticallyAdjustsScrollViewInsets="NO" id="zqg-P6-LK7" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9zv-cj-wZ8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -91,7 +107,43 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czI-Rf-c8j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="326" y="477"/>
+            <point key="canvasLocation" x="306" y="541"/>
+        </scene>
+        <!--Card Detail View Controller-->
+        <scene sceneID="wqN-sb-wA5">
+            <objects>
+                <viewController storyboardIdentifier="CardDetailViewController" id="0wc-3x-Dhz" customClass="CardDetailViewController" customModule="Mocaccino" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Keo-ZH-a3K"/>
+                        <viewControllerLayoutGuide type="bottom" id="QJI-LG-tYE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yYf-5z-Zdi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="eBv-7B-eA1">
+                                <rect key="frame" x="281" y="563" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.90196079019999997" green="0.35686275360000003" blue="0.47450980539999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.1960784314" green="0.59607843140000005" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7t-pU-EdC">
+                                <rect key="frame" x="558" y="571" width="22" height="22"/>
+                                <connections>
+                                    <action selector="addCardButtonPressed:" destination="0wc-3x-Dhz" eventType="touchUpInside" id="4vX-6i-TqU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Q7t-pU-EdC" firstAttribute="centerY" secondItem="eBv-7B-eA1" secondAttribute="centerY" id="BaB-Ev-Xyb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Q7t-pU-EdC" secondAttribute="trailing" id="FD7-Z5-xoH"/>
+                            <constraint firstItem="QJI-LG-tYE" firstAttribute="top" secondItem="eBv-7B-eA1" secondAttribute="bottom" id="pRx-hZ-Wge"/>
+                            <constraint firstItem="eBv-7B-eA1" firstAttribute="centerX" secondItem="yYf-5z-Zdi" secondAttribute="centerX" id="ykO-hy-mBY"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UoG-im-VqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="1283"/>
         </scene>
     </scenes>
 </document>
