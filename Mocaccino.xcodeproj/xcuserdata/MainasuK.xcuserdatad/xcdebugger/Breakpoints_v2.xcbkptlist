@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CoreDataStack.swift"
@@ -34,19 +34,19 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
-            filePath = "Mocaccino/WordListViewController.swift"
-            timestampString = "476456329.665901"
+            filePath = "Mocaccino/RootViewController.swift"
+            timestampString = "476615167.469985"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "WordListViewController"
-            landmarkType = "3">
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "willTransitionToTraitCollection(_:withTransitionCoordinator:)"
+            landmarkType = "5">
             <Actions>
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Log">
                   <ActionContent
-                     message = "%B: self.isActive willSet to @newValue@"
+                     message = "%B: w: @newCollection.horizontalSizeClass@, h: @newCollection.verticalSizeClass@"
                      conveyanceType = "0">
                   </ActionContent>
                </BreakpointActionProxy>

@@ -1,5 +1,5 @@
 //
-//  WordListViewController.swift
+//  CardListViewController.swift
 //  Mocaccino
 //
 //  Created by Cirno MainasuK on 2016-2-5.
@@ -11,26 +11,23 @@ import CoreData
 
 private let kWordCellReuseIdentifier = "wordCellReuseIdentifier"
 
-class WordListViewController: UIViewController {
+class CardListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
     var coreDataStack: CoreDataStack!
     var fetchedResultsController: NSFetchedResultsController!
     var isActive: Bool = false {
         willSet {
-            self.navigationItem.rightBarButtonItem?.enabled = (newValue == true) ? true : false
+//            self.navigationItem.rightBarButtonItem?.enabled = (newValue == true) ? true : false
         }
     }
     
     @IBAction func addButtonPressed(sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "New card", message: "Add a new flashcard", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "New Deck", message: "Add a new deck", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
             
-            textField.placeholder = "Type a word…"
-        }
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
-            
-            textField.placeholder = "Type definition(s)…"
+            textField.placeholder = "Deck name…"
         }
         
         alert.addAction(UIAlertAction(title: "Save", style: .Default, handler: { (action: UIAlertAction) -> Void in
@@ -38,14 +35,12 @@ class WordListViewController: UIViewController {
             print("Saved")
             let context = self.fetchedResultsController.managedObjectContext
             let entity = self.fetchedResultsController.fetchRequest.entity!
-            let card = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Card
+            let deck = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as! Deck
 
-            let wordTextField = alert.textFields!.first
-            let definitionTextField = alert.textFields!.last
+            let deckNameTextField = alert.textFields!.first
             
-            card.title = wordTextField!.text
-            card.definition = definitionTextField!.text
-            card.timeStamp = NSDate()
+            deck.name = deckNameTextField!.text
+            deck.timeStamp = NSDate()
             
             self.coreDataStack.saveContext()
         }))
@@ -62,8 +57,14 @@ class WordListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBarHidden = true
+        
         self.setupFetchedResultsController()
         self.refetchData()
+        
+        self.view.backgroundColor = UIColor.blackColor()
+        self.tableView.backgroundColor = UIColor.blackColor()
+        self.tableView.tableFooterView = UIView()
         
         NSNotificationCenter.defaultCenter().addObserver(self,
             selector: "persistentStoreDidChange:",
@@ -95,6 +96,9 @@ class WordListViewController: UIViewController {
     // MARK: - UIResponder
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        
+        self.addButtonPressed(UIBarButtonItem())
+        return
 
         if #available(iOS 9.0, *) {
             if motion != .MotionShake { return }
@@ -127,31 +131,23 @@ class WordListViewController: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let card = fetchedResultsController.objectAtIndexPath(indexPath) as! Card
-        cell.textLabel!.text = card.title
-        cell.detailTextLabel!.text = card.definition
+        let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
+        cell.textLabel!.text = deck.name
+        let cardsCount = deck.cards?.count ?? 0
+        cell.detailTextLabel!.text = (cardsCount == 0) ? "\(cardsCount) card" : "\(cardsCount) cards"
     }
     
     private func setupFetchedResultsController() {
-        let fetchRequest = NSFetchRequest(entityName: "Card")
+        let fetchRequest = NSFetchRequest(entityName: "Deck")
         let titleSort = NSSortDescriptor(key: "timeStamp", ascending: false)
         fetchRequest.sortDescriptors = [titleSort]
         
         self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: self.coreDataStack.context,
                                                                    sectionNameKeyPath: nil,
-                                                                   cacheName: "Mocaccino")
+                                                                   cacheName: "MocaccinoDeck")
         self.fetchedResultsController.delegate = self
     }
     
@@ -167,7 +163,7 @@ class WordListViewController: UIViewController {
 
 // MARK: - iCloud observer
 
-extension WordListViewController {
+extension CardListViewController {
     func persistentStoreDidChange (notification: NSNotification) {
         NSLog("PersistenStore did change")
         
@@ -226,7 +222,7 @@ extension WordListViewController {
 
 // MARK: - UITableViewDataSource
 
-extension WordListViewController: UITableViewDataSource {
+extension CardListViewController: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections!.count
@@ -246,7 +242,7 @@ extension WordListViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension WordListViewController: UITableViewDelegate {
+extension CardListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return self.isActive
     }
@@ -273,7 +269,7 @@ extension WordListViewController: UITableViewDelegate {
 
 // MARK: - NSFetchedResultsControllerDelegate
 
-extension WordListViewController: NSFetchedResultsControllerDelegate {
+extension CardListViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
         self.isActive = false
