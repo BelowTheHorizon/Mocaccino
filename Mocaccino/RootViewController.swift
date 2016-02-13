@@ -17,13 +17,25 @@ class RootViewController: UIViewController {
     
     var currentSizeClasses: (w: UIUserInterfaceSizeClass, h: UIUserInterfaceSizeClass)!
     var currentFaceIdiom: UIUserInterfaceIdiom!
+    
+    let statusBarBlurredView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+    
     // MARK: View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.addSubview(statusBarBlurredView)
+        
         self.currentSizeClasses = (self.view.traitCollection.horizontalSizeClass, self.view.traitCollection.verticalSizeClass)
         self.currentFaceIdiom = UIDevice.currentDevice().userInterfaceIdiom
+        
+        // Autolayout statusBarBlurredView
+        let leading = NSLayoutConstraint(item: statusBarBlurredView, attribute: .Leading, relatedBy: .Equal, toItem: self.view, attribute: .Leading, multiplier: 1, constant: 0)
+        let trailing = NSLayoutConstraint(item: statusBarBlurredView, attribute: .Trailing, relatedBy: .Equal, toItem: self.view, attribute: .Trailing, multiplier: 1, constant: 0)
+        let top = NSLayoutConstraint(item: statusBarBlurredView, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1.0, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: statusBarBlurredView, attribute: .Bottom, relatedBy: .Equal, toItem: self.topLayoutGuide, attribute: .Bottom, multiplier: 1.0, constant: 0)
+        statusBarBlurredView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activateConstraints([leading, trailing, top, bottom])
 
         self.initSubView()
         self.setLayoutOfSubView()
@@ -31,6 +43,7 @@ class RootViewController: UIViewController {
 
         // Configure RootViewController appearance
         self.view.backgroundColor = UIColor.clearColor()
+        self.view.bringSubviewToFront(statusBarBlurredView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,12 +77,13 @@ class RootViewController: UIViewController {
     
     private func initSubView() {
         // Init CardListViewController
-        self.navigationController_CardListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NavigationController-CardListViewController") as! UINavigationController
-        self.cardListViewController = self.navigationController_CardListViewController.childViewControllers.first! as! CardListViewController
-        self.cardListViewController.coreDataStack = self.coreDataStack
+        navigationController_CardListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NavigationController-CardListViewController") as! UINavigationController
+        cardListViewController = self.navigationController_CardListViewController.childViewControllers.first! as! CardListViewController
+        cardListViewController.coreDataStack = self.coreDataStack
         
         // Init CardDetailViewController
-        self.cardDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CardDetailViewController") as! CardDetailViewController
+        cardDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CardDetailViewController") as! CardDetailViewController
+        cardDetailViewController.cardAddingControllerDelegate = cardListViewController
     }
     
     private func setLayoutOfSubView(size: CGSize? = nil) {
@@ -160,5 +174,12 @@ class RootViewController: UIViewController {
         
         // Add subview CardDetailViewController
         self.view.addSubview(self.cardDetailViewController.view)
+    }
+}
+
+extension RootViewController: CardAddingManager {
+    func presentCardAddController() {
+        let controller = CardAddViewController(fromView: self.view)
+        presentViewController(controller, animated: true, completion: nil)
     }
 }

@@ -10,12 +10,17 @@ import UIKit
 
 class CardDetailViewController: UIViewController {
     
+    var cardAddingControllerDelegate: CardAddingManager?
+    
     @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var pageView: UIView!
     
     var visualEffectView: UIVisualEffectView!
+    var cardDetailPageViewController: CardDetailPageViewController!
     
     @IBAction func addCardButtonPressed(sender: UIButton) {
         NSLog("Add card button pressed")
+        cardAddingControllerDelegate?.presentCardAddController()
     }
     
     override func viewDidLoad() {
@@ -27,7 +32,6 @@ class CardDetailViewController: UIViewController {
         
         self.view.addSubview(self.visualEffectView)
         self.view.sendSubviewToBack(self.visualEffectView)
-    
     }
     
     override func viewWillLayoutSubviews() {
@@ -42,14 +46,19 @@ class CardDetailViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func initSubView() {
+        self.cardDetailPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CardDetailPageViewController") as! CardDetailPageViewController
     }
-    */
+    
+    private func setLayoutOfSubView() {
+        self.cardDetailPageViewController.view.frame = self.pageView.frame
+    }
+    
+    private func addSubView() {
+        self.view.addSubview(self.cardDetailPageViewController.view)
+    }
+}
 
+protocol CardAddingManager {
+    func presentCardAddController()
 }

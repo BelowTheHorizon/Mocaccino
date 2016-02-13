@@ -13,6 +13,7 @@ private let kWordCellReuseIdentifier = "wordCellReuseIdentifier"
 
 class CardListViewController: UIViewController {
     
+    var addDeckButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     var coreDataStack: CoreDataStack!
@@ -22,6 +23,7 @@ class CardListViewController: UIViewController {
 //            self.navigationItem.rightBarButtonItem?.enabled = (newValue == true) ? true : false
         }
     }
+    var currentDeck: Deck?
     
     @IBAction func addButtonPressed(sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "New Deck", message: "Add a new deck", preferredStyle: .Alert)
@@ -43,6 +45,7 @@ class CardListViewController: UIViewController {
             deck.timeStamp = NSDate()
             
             self.coreDataStack.saveContext()
+            self.tableView.reloadData()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) -> Void in
             
@@ -57,14 +60,16 @@ class CardListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBarHidden = true
+        navigationController?.navigationBarHidden = true
         
-        self.setupFetchedResultsController()
-        self.refetchData()
+        setupFetchedResultsController()
+        refetchData()
         
-        self.view.backgroundColor = UIColor.blackColor()
-        self.tableView.backgroundColor = UIColor.blackColor()
-        self.tableView.tableFooterView = UIView()
+        view.backgroundColor = UIColor.blackColor()
+        tableView.backgroundColor = UIColor.blackColor()
+        
+        addDeckButton = UIButton(type: UIButtonType.ContactAdd)
+        addDeckButton.tintColor = UIColor.whiteColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self,
             selector: "persistentStoreDidChange:",
@@ -93,13 +98,47 @@ class CardListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Private functions
+    
+    private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
+        cell.textLabel!.text = deck.name
+        cell.textLabel!.highlightedTextColor = UIColor.blackColor()
+        let cardsCount = deck.cards?.count ?? 0
+        cell.detailTextLabel!.text = (cardsCount == 0) ? "\(cardsCount) card" : "\(cardsCount) cards"
+        cell.detailTextLabel!.highlightedTextColor = UIColor.blackColor()
+        
+        cell.backgroundColor = UIColor.clearColor()
+    }
+    
+    private func setupFetchedResultsController() {
+        let fetchRequest = NSFetchRequest(entityName: "Deck")
+        let titleSort = NSSortDescriptor(key: "timeStamp", ascending: false)
+        fetchRequest.sortDescriptors = [titleSort]
+        
+        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                   managedObjectContext: self.coreDataStack.context,
+                                                                   sectionNameKeyPath: nil,
+                                                                   cacheName: "MocaccinoDeck")
+        self.fetchedResultsController.delegate = self
+    }
+    
+    private func refetchData() {
+        do {
+            NSLog("Try to refetch data")
+            try self.fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
     // MARK: - UIResponder
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
         
-        self.addButtonPressed(UIBarButtonItem())
+        addButtonPressed(UIBarButtonItem())
         return
-
+        
         if #available(iOS 9.0, *) {
             if motion != .MotionShake { return }
             
@@ -126,37 +165,8 @@ class CardListViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }))
-
+            
             presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    
-    
-    private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
-        cell.textLabel!.text = deck.name
-        let cardsCount = deck.cards?.count ?? 0
-        cell.detailTextLabel!.text = (cardsCount == 0) ? "\(cardsCount) card" : "\(cardsCount) cards"
-    }
-    
-    private func setupFetchedResultsController() {
-        let fetchRequest = NSFetchRequest(entityName: "Deck")
-        let titleSort = NSSortDescriptor(key: "timeStamp", ascending: false)
-        fetchRequest.sortDescriptors = [titleSort]
-        
-        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                   managedObjectContext: self.coreDataStack.context,
-                                                                   sectionNameKeyPath: nil,
-                                                                   cacheName: "MocaccinoDeck")
-        self.fetchedResultsController.delegate = self
-    }
-    
-    private func refetchData() {
-        do {
-            NSLog("Try to refetch data")
-            try self.fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("Error: \(error.localizedDescription)")
         }
     }
 }
@@ -254,16 +264,77 @@ extension CardListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == .Delete {
-            let cardToRemove = fetchedResultsController.objectAtIndexPath(indexPath) as! Card
-            fetchedResultsController.managedObjectContext.deleteObject(cardToRemove)
             
-            do {
-                try fetchedResultsController.managedObjectContext.save()
-                print("Delete")
-            } catch let error as NSError {
-                print("Could not save: \(error)")
-            }
+            let deckToRemove = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
+            let alert = UIAlertController(title: "Delete \(deckToRemove.name!)?", message: nil, preferredStyle: .Alert)
+            
+            let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction) -> Void in
+                
+                self.fetchedResultsController.managedObjectContext.deleteObject(deckToRemove)
+                
+                do {
+                    try self.fetchedResultsController.managedObjectContext.save()
+                    print("Delete")
+                } catch let error as NSError {
+                    print("Could not save: \(error)")
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) -> Void in
+                
+                print("Cancel")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            })
+            
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            
+            presentViewController(alert, animated: true, completion: nil)
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+        
+        let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
+        currentDeck = deck
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.whiteColor()
+        cell?.selectedBackgroundView = backgroundView
+    }
+
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+    }
+
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 40))
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = footerView.bounds
+        gradientLayer.colors = [UIColor.clearColor(), UIColor.blackColor().CGColor]
+        
+        footerView.layer.insertSublayer(gradientLayer, atIndex: 0)
+        footerView.addSubview(addDeckButton)
+        
+        let centerX = NSLayoutConstraint(item: addDeckButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: footerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let centerY = NSLayoutConstraint(item: addDeckButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: footerView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
+        addDeckButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activateConstraints([centerX, centerY])
+        
+        return footerView
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40.0
     }
 }
 
@@ -279,9 +350,9 @@ extension CardListViewController: NSFetchedResultsControllerDelegate {
         
         switch type {
         case .Insert:
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         case .Update:
             self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .None)
         case .Move:
@@ -307,5 +378,54 @@ extension CardListViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
         self.isActive = true
+    }
+}
+
+
+// MARK: - CardAddingManager
+extension CardListViewController: CardAddingManager {
+    func presentCardAddController() {
+        guard let currentDeck = currentDeck else {
+            NSLog("No deck selected")
+            return
+        }
+        
+        let alert = UIAlertController(title: "\(currentDeck.name!)", message: "Add a new card", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
+            
+            textField.placeholder = "Card front…"
+        }
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
+            
+            textField.placeholder = "Card back…"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) -> Void in
+            
+            print("Cancel")
+        }))
+        alert.addAction(UIAlertAction(title: "Save", style: .Default, handler: { (action: UIAlertAction) -> Void in
+            
+            print("Card saved")
+            
+            let context = self.coreDataStack.context
+            let cardEntity = NSEntityDescription.entityForName("Card", inManagedObjectContext: context)
+            let card = Card(entity: cardEntity!, insertIntoManagedObjectContext: context)
+            
+            let cardFrontTextField = alert.textFields!.first
+            let cardBackTextField = alert.textFields!.last
+            
+            card.timeStamp = NSDate()
+            card.title = cardFrontTextField!.text
+            card.definition = cardBackTextField!.text
+            card.currentPeriod = 0
+            card.memoryScore = 100
+            
+            card.deck = currentDeck
+            
+            self.coreDataStack.saveContext()
+        }))
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
 }

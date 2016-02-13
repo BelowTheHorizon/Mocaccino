@@ -35,11 +35,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/RootViewController.swift"
-            timestampString = "476615167.469985"
+            timestampString = "477041118.290186"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "willTransitionToTraitCollection(_:withTransitionCoordinator:)"
             landmarkType = "5">
             <Actions>
