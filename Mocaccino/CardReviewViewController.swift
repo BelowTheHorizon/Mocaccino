@@ -103,15 +103,28 @@ class CardReviewViewController: UIViewController {
     }
     
     private func deleteCard(card: Card) {
-        print("Delete card:\n\(card)")
-        let context = self.coreDataStack.context
-        context.deleteObject(card)
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save \(error), \(error.userInfo)")
+        let alert = UIAlertController(title: "Delete \(card.title!)", message: nil, preferredStyle: .Alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action: UIAlertAction) -> Void in
+            print("Delete card:\n\(card)")
+            let context = self.coreDataStack.context
+            context.deleteObject(card)
+            
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+            self.tapped()
+            self.cardReviewCoordinator?.didReviewCard()
         }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction) -> Void in
+            print("Cancel")
+        }
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
 }
 
@@ -120,7 +133,7 @@ extension CardReviewViewController: CardEventManager {
         let model = MoccacinoMemoryModel.shared
         card.memoryScore = 100.0
         card.currentPeriod = NSNumber(integer: card.currentPeriod!.integerValue + 1)
-        card.nextReviewTime = model.caculateNextReviewTimeWith(card)
+        card.nextReviewTime = model.calculateNextReviewTimeWith(card)
         saveCard(card)
         tapped()
         cardReviewCoordinator?.didReviewCard()
@@ -129,7 +142,7 @@ extension CardReviewViewController: CardEventManager {
     
     func forgetButtonPressed(card: Card) {
         let model = MoccacinoMemoryModel.shared
-        card.nextReviewTime = model.caculateOneDayMore(card)
+        card.nextReviewTime = model.calculateOneDayMore(card)
         saveCard(card)
         tapped()
         cardReviewCoordinator?.didReviewCard()
@@ -137,8 +150,6 @@ extension CardReviewViewController: CardEventManager {
     
     func forgetButtonLongPressed(card: Card) {
         deleteCard(card)
-        tapped()
-        cardReviewCoordinator?.didReviewCard()
     }
 }
 
