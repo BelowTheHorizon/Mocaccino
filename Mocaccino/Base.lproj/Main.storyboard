@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Card List View Controller-->
@@ -89,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rda-Z2-s2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="306" y="-332"/>
+            <point key="canvasLocation" x="306" y="-160"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7gE-uC-S0o">
@@ -121,29 +120,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="eBv-7B-eA1">
-                                <rect key="frame" x="281" y="563" width="39" height="37"/>
-                                <color key="pageIndicatorTintColor" red="0.90196079019999997" green="0.35686275360000003" blue="0.47450980539999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.1960784314" green="0.59607843140000005" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                            </pageControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7t-pU-EdC">
-                                <rect key="frame" x="558" y="571" width="22" height="22"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lT5-eZ-XIa">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7t-pU-EdC">
+                                        <rect key="frame" x="20" y="0.0" width="560" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="9Hw-dm-K9H">
+                                                <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
+                                                <variation key="heightClass=compact-widthClass=regular" constant="0.0"/>
+                                                <variation key="heightClass=regular-widthClass=compact" constant="44"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                            </constraint>
+                                        </constraints>
+                                        <color key="tintColor" red="0.90196079019999997" green="0.35686275360000003" blue="0.47450980539999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="add"/>
+                                        <connections>
+                                            <action selector="addCardButtonPressed:" destination="0wc-3x-Dhz" eventType="touchUpInside" id="4vX-6i-TqU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Q7t-pU-EdC" secondAttribute="trailing" constant="20" symbolic="YES" id="A8x-Kx-fmQ"/>
+                                    <constraint firstItem="Q7t-pU-EdC" firstAttribute="leading" secondItem="lT5-eZ-XIa" secondAttribute="leading" constant="20" symbolic="YES" id="NTj-UF-YsE"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q7t-pU-EdC" secondAttribute="bottom" id="rMR-FN-0RR"/>
+                                    <constraint firstItem="Q7t-pU-EdC" firstAttribute="top" secondItem="lT5-eZ-XIa" secondAttribute="top" id="rOZ-jM-6Ab"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pmt-5P-Fdm">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <connections>
-                                    <action selector="addCardButtonPressed:" destination="0wc-3x-Dhz" eventType="touchUpInside" id="4vX-6i-TqU"/>
+                                    <segue destination="Mp0-1T-Oz7" kind="embed" id="N0i-Lg-JI5"/>
                                 </connections>
-                            </button>
+                            </containerView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Q7t-pU-EdC" firstAttribute="centerY" secondItem="eBv-7B-eA1" secondAttribute="centerY" id="BaB-Ev-Xyb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Q7t-pU-EdC" secondAttribute="trailing" id="FD7-Z5-xoH"/>
-                            <constraint firstItem="QJI-LG-tYE" firstAttribute="top" secondItem="eBv-7B-eA1" secondAttribute="bottom" id="pRx-hZ-Wge"/>
-                            <constraint firstItem="eBv-7B-eA1" firstAttribute="centerX" secondItem="yYf-5z-Zdi" secondAttribute="centerX" id="ykO-hy-mBY"/>
+                            <constraint firstItem="Pmt-5P-Fdm" firstAttribute="leading" secondItem="yYf-5z-Zdi" secondAttribute="leading" id="3gK-dU-afo"/>
+                            <constraint firstItem="Pmt-5P-Fdm" firstAttribute="top" secondItem="yYf-5z-Zdi" secondAttribute="top" id="CaJ-3Q-jtS"/>
+                            <constraint firstAttribute="trailing" secondItem="Pmt-5P-Fdm" secondAttribute="trailing" id="LWL-ez-hdL"/>
+                            <constraint firstAttribute="trailing" secondItem="lT5-eZ-XIa" secondAttribute="trailing" id="MbK-xV-Exu"/>
+                            <constraint firstItem="lT5-eZ-XIa" firstAttribute="top" secondItem="Pmt-5P-Fdm" secondAttribute="bottom" id="RSt-N0-AbZ"/>
+                            <constraint firstItem="lT5-eZ-XIa" firstAttribute="leading" secondItem="yYf-5z-Zdi" secondAttribute="leading" id="cHJ-2f-Uce"/>
+                            <constraint firstItem="QJI-LG-tYE" firstAttribute="top" secondItem="lT5-eZ-XIa" secondAttribute="bottom" id="cm0-Di-edz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonView" destination="lT5-eZ-XIa" id="lfb-U3-bvH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UoG-im-VqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1014" y="1283"/>
+            <point key="canvasLocation" x="1014" y="1234.5"/>
+        </scene>
+        <!--Card Review View Controller-->
+        <scene sceneID="nTS-Ir-ltd">
+            <objects>
+                <viewController storyboardIdentifier="PageCardReviewViewController" id="Mp0-1T-Oz7" customClass="CardReviewViewController" customModule="Mocaccino" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Plr-o8-OQL"/>
+                        <viewControllerLayoutGuide type="bottom" id="VKD-81-57n"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SM0-Ba-kyh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oBX-09-YIE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1738" y="1234"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add" width="22" height="22"/>
+    </resources>
 </document>
