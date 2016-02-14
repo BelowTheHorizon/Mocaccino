@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CardBackView" customModule="Mocaccino" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-ra-9L5">
+                    <rect key="frame" x="126" y="88" width="48" height="25"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Front" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="6T9-R4-V0E">
+                    <rect key="frame" x="117" y="47" width="66" height="33"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="46"/>
+                    </variation>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVW-fv-l0c">
+                    <rect key="frame" x="150" y="156" width="150" height="44"/>
+                    <color key="backgroundColor" red="0.32941176470588235" green="0.76470588235294112" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="v7x-6R-5Cg"/>
+                    </constraints>
+                    <state key="normal" title="Remember">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="rememberButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="J1B-lJ-FAU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKU-q5-5jE">
+                    <rect key="frame" x="0.0" y="156" width="150" height="44"/>
+                    <color key="backgroundColor" red="0.8901960784313725" green="0.24705882352941178" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
+                    <state key="normal" title="Forget">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="forgetButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="DxA-yA-et4"/>
+                        <outletCollection property="gestureRecognizers" destination="OPX-zj-c3G" appends="YES" id="1gA-Zw-A9O"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="cVW-fv-l0c" secondAttribute="trailing" id="6ig-w7-Qn8"/>
+                <constraint firstAttribute="bottom" secondItem="cVW-fv-l0c" secondAttribute="bottom" id="Efv-OW-AsM"/>
+                <constraint firstItem="IKU-q5-5jE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fnf-OW-gPh"/>
+                <constraint firstItem="cVW-fv-l0c" firstAttribute="leading" secondItem="IKU-q5-5jE" secondAttribute="trailing" id="Ls2-RZ-SFP"/>
+                <constraint firstItem="6T9-R4-V0E" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ved-Ed-JIj"/>
+                <constraint firstItem="cVW-fv-l0c" firstAttribute="height" secondItem="IKU-q5-5jE" secondAttribute="height" id="YHs-HO-Ajr"/>
+                <constraint firstItem="cVW-fv-l0c" firstAttribute="width" secondItem="IKU-q5-5jE" secondAttribute="width" id="Zoc-yz-QzQ"/>
+                <constraint firstItem="2e6-ra-9L5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="frL-Eo-0vw"/>
+                <constraint firstItem="2e6-ra-9L5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oDv-z2-xI2"/>
+                <constraint firstItem="2e6-ra-9L5" firstAttribute="top" secondItem="6T9-R4-V0E" secondAttribute="bottom" constant="8" symbolic="YES" id="psm-mz-z7t"/>
+                <constraint firstAttribute="bottom" secondItem="IKU-q5-5jE" secondAttribute="bottom" id="tfm-lN-hNB"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backTextLabel" destination="2e6-ra-9L5" id="dtz-sV-F6V"/>
+                <outlet property="frontTextLabel" destination="6T9-R4-V0E" id="hu6-P4-Vn2"/>
+            </connections>
+        </view>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="OPX-zj-c3G">
+            <connections>
+                <action selector="forgetButtonLongPressed:" destination="iN0-l3-epB" id="9dJ-vt-450"/>
+            </connections>
+        </pongPressGestureRecognizer>
+    </objects>
+</document>
