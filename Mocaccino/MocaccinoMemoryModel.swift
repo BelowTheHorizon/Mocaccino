@@ -34,8 +34,8 @@ class MoccacinoMemoryModel {
         return self.instance
     }
     
-    func caculateNextReviewTimeWith(card: Card) -> NSDate {
-        let currentDate = card.nextReviewTime ?? card.timeStamp!
+    func calculateNextReviewTimeWith(card: Card) -> NSDate {
+        let currentDate = (card.nextReviewTime ?? card.timeStamp!).laterDate(NSDate())
         var currentPeriod = card.currentPeriod!.integerValue
         var memoryScore = card.memoryScore!.doubleValue
         
@@ -59,7 +59,8 @@ class MoccacinoMemoryModel {
         return NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 365, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))!
     }
     
-    func caculateOneDayMore(card: Card) -> NSDate {
-        return NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: card.nextReviewTime ?? card.timeStamp!, options: NSCalendarOptions.init(rawValue: 0))!
+    func calculateOneDayMore(card: Card) -> NSDate {
+        let currentDate = (card.nextReviewTime ?? card.timeStamp!).laterDate(NSDate())
+        return NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: 1, toDate: currentDate, options: NSCalendarOptions.init(rawValue: 0))!
     }
 }
