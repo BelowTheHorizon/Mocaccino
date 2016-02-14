@@ -226,7 +226,7 @@ class CardListViewController: UIViewController {
                 
                 print("Cancel")
             }))
-            alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction) -> Void in
+            alert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction) -> Void in
                 
                 let fetchRequest = NSFetchRequest(entityName: "Card")
                 let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -243,6 +243,22 @@ class CardListViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }))
+            alert.addAction(UIAlertAction(title: "Print", style: .Default, handler: { (action: UIAlertAction) -> Void in
+                print("Card print\n----\n")
+                
+                let fetchRequest = NSFetchRequest(entityName: "Card")
+                
+                do {
+                    let cards = try self.coreDataStack.context.executeFetchRequest(fetchRequest) as! [Card]
+                    for card in cards {
+                        print(card)
+                    }
+                    print("\n----\nEnd")
+                } catch let error as NSError {
+                    print("Could not fetch \(error), \(error.userInfo)")
+                }
+            }))
+            
             
             presentViewController(alert, animated: true, completion: nil)
         }
@@ -543,7 +559,7 @@ extension CardListViewController: CardAddingManager {
             card.definition = cardBackTextField!.text
             card.currentPeriod = 0
             card.memoryScore = 100
-            card.nextReviewTime = model.caculateNextReviewTimeWith(card)
+            card.nextReviewTime = model.calculateNextReviewTimeWith(card)
             
             card.deck = currentDeck
             

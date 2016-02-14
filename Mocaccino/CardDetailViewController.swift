@@ -54,6 +54,13 @@ class CardDetailViewController: UIViewController {
         self.view.sendSubviewToBack(self.visualEffectView)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "isActiveChanged:", name: "CardListActiveStatusChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refetchNeedToReviewCards", name: UIApplicationWillEnterForegroundNotification, object: UIApplication.sharedApplication())
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillEnterForegroundNotification, object: UIApplication.sharedApplication())
     }
     
     override func viewWillLayoutSubviews() {
@@ -90,7 +97,7 @@ class CardDetailViewController: UIViewController {
         }
     }
     
-    private func refetchNeedToReviewCards() {
+    func refetchNeedToReviewCards() {
         let fetchRequest = NSFetchRequest(entityName: "Card")
         let currentDate = NSDate()
         let predicate = NSPredicate(format: "nextReviewTime <= %@", currentDate)
