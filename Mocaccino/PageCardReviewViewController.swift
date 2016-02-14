@@ -10,32 +10,36 @@ import UIKit
 
 class PageCardReviewViewController: UIViewController {
 
+    let blurredView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    var isActive = false
     var index: Int!
-    
-    
+    var card: Card?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        blurredView.frame = view.bounds
+        view.addSubview(blurredView)
+        view.sendSubviewToBack(blurredView)
         view.backgroundColor = UIColor.clearColor()
+        
+        titleLabel.text = card?.title
+        isActive = true
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        self.blurredView.frame = self.view.bounds
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension PageCardReviewViewController: UIPageContentViewController {

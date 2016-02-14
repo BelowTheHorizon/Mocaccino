@@ -10,8 +10,9 @@ import UIKit
 
 class CardDetailPageViewController: UIPageViewController {
     
-    var pageContentViewControllerIdentifier = ["PageCardReviewViewController", "PageCardAddViewController", "PageCardNewDeckViewController"]
-    var currentPageContentViewControllerIndex: Int = 0
+    var cards = [Card]()
+    
+    var pageContentViewControllerIdentifier = "PageCardReviewViewController"
     var pageViewControllers = [UIViewController]()
     
     override func viewDidLoad() {
@@ -20,11 +21,14 @@ class CardDetailPageViewController: UIPageViewController {
         self.dataSource = self
         
         // Create the first walkthrough screen
-        pageViewControllers.append(self.initViewControllerAIndex(0)!)
-        pageViewControllers.append(self.initViewControllerAIndex(1)!)
-        pageViewControllers.append(self.initViewControllerAIndex(2)!)
-
-        setViewControllers([pageViewControllers.first!], direction: .Forward, animated: true, completion: nil)
+        if !cards.isEmpty {
+            pageViewControllers.append(self.initViewControllerAIndex(0)!)
+            setViewControllers([pageViewControllers.first!], direction: .Forward, animated: true, completion: nil)
+        } else {
+            let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(pageContentViewControllerIdentifier) as! PageCardReviewViewController
+            controller.index = 0
+            setViewControllers([controller], direction: .Forward, animated: true, completion: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,17 +36,24 @@ class CardDetailPageViewController: UIPageViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func reloadCards(cards: [Card]) {
+        self.cards = cards
+        // save context
+        pageViewControllers.removeAll()
+        pageViewControllers.append(self.initViewControllerAIndex(0)!)
+        setViewControllers([pageViewControllers.first!], direction: .Forward, animated: true, completion: nil)
+    }
+    
 
     private func initViewControllerAIndex(index: Int) -> UIViewController? {
-//        guard index != NSNotFound && index >= 0 && index < pageContentViewControllerIdentifier.count else {
-//            return nil
-//        }
+        guard index != NSNotFound && index >= 0 && index < cards.count else {
+            return nil
+        }
         
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(pageContentViewControllerIdentifier[index])
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(pageContentViewControllerIdentifier) as! PageCardReviewViewController
+        controller.index = index
+        controller.card = cards[index]
         
-        (controller as? PageCardReviewViewController)?.index = index
-        (controller as? PageCardAddViewController)?.index = index
-        (controller as? PageCardNewDeckViewController)?.index = index
         
         return controller
     }
@@ -50,31 +61,45 @@ class CardDetailPageViewController: UIPageViewController {
 
 extension CardDetailPageViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        
-        var index = (viewController as? UIPageContentViewController)?.pageIndex() ?? 0
-        index -= 1
-        
-        if index == -1 {
-            index = self.pageContentViewControllerIdentifier.count - 1
-        } else if index == self.pageContentViewControllerIdentifier.count {
-            index = 0
+        guard pageViewControllers.isEmpty == false else {
+            return nil
         }
-
-        return self.pageViewControllers[index]
+        
+        let index = (viewController as? PageCardReviewViewController)!.pageIndex() - 1
+        if index <= -1 || index >= cards.count {
+            return nil
+        }
+        
+        guard index >= 0 && index < pageViewControllers.count else {
+            return initViewControllerAIndex(index)
+        }
+        
+        if let controller = pageViewControllers[index] as? PageCardReviewViewController {
+            return controller
+        } else {
+            return initViewControllerAIndex(index)
+        }
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        guard pageViewControllers.isEmpty == false else {
+            return nil
+        }
         
-        var index = (viewController as? UIPageContentViewController)?.pageIndex() ?? 0
-        index += 1
+        let index = (viewController as? PageCardReviewViewController)!.pageIndex() + 1
+        if index <= -1 || index >= cards.count {
+            return nil
+        }
         
-        if index == -1 {
-            index = self.pageContentViewControllerIdentifier.count - 1
-        } else if index == self.pageContentViewControllerIdentifier.count {
-            index = 0
+        guard index >= 0 && index < pageViewControllers.count else {
+            return initViewControllerAIndex(index)
         }
 
-        return self.pageViewControllers[index]
+        if let controller = pageViewControllers[index] as? PageCardReviewViewController {
+            return controller
+        } else {
+            return nil
+        }
     }
 }
 

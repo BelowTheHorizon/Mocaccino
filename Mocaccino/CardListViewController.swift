@@ -10,28 +10,51 @@ import UIKit
 import CoreData
 
 private let kWordCellReuseIdentifier = "wordCellReuseIdentifier"
+private let kCardAddButtonViewHeight: CGFloat = 44.0
 
 class CardListViewController: UIViewController {
     
-    var addDeckButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    let cardAddButtonView = UINib(nibName: "CardAddButtonView", bundle: nil).instantiateWithOwner(nil, options: nil).first as! CardAddButtonView!
     
+    @IBOutlet weak var tableView: UITableView!
+    var addDeckButton: UIButton!
+    var sizeClassesAdaptor: SizeClassesAdaptor!
+    var cardReviewManager: CardReviewManager!
     var coreDataStack: CoreDataStack!
     var fetchedResultsController: NSFetchedResultsController!
     var isActive: Bool = false {
-        willSet {
-//            self.navigationItem.rightBarButtonItem?.enabled = (newValue == true) ? true : false
+        didSet {
+            NSNotificationCenter.defaultCenter().postNotificationName("CardListActiveStatusChange", object: isActive)
         }
     }
-    var currentDeck: Deck?
+    var currentColor: UIColor! {
+        didSet {
+            cardAddButtonView.backgroundColor = currentColor
+        }
+    }
+    var currentIndexPath: NSIndexPath?
+    var currentDeck: Deck? {
+        didSet {
+            animateCardAddButtonView()
+        }
+    }
+    var currentSizeClasses: (w: UIUserInterfaceSizeClass, h: UIUserInterfaceSizeClass)! {
+        didSet {
+            setLayoutOfSubView()
+        }
+    }
     
-    @IBAction func addButtonPressed(sender: UIBarButtonItem) {
+    func addDeckButtonPressed(sender: UIButton? = nil) {
         let alert = UIAlertController(title: "New Deck", message: "Add a new deck", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
             
             textField.placeholder = "Deck name…"
         }
         
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) -> Void in
+            
+            print("Cancel")
+        }))
         alert.addAction(UIAlertAction(title: "Save", style: .Default, handler: { (action: UIAlertAction) -> Void in
             
             print("Saved")
@@ -47,10 +70,6 @@ class CardListViewController: UIViewController {
             self.coreDataStack.saveContext()
             self.tableView.reloadData()
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) -> Void in
-            
-            print("Cancel")
-        }))
         
         presentViewController(alert, animated: true, completion: nil)
     }
@@ -60,16 +79,23 @@ class CardListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        currentColor = UIColor.RandomKMColor()
+        cardAddButtonView.cardAddingControllerDelegate = self
+        sizeClassesAdaptor = self
         navigationController?.navigationBarHidden = true
         
         setupFetchedResultsController()
         refetchData()
         
+        cardAddButtonView.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: kCardAddButtonViewHeight)
+        self.view.addSubview(cardAddButtonView)
+        
         view.backgroundColor = UIColor.blackColor()
         tableView.backgroundColor = UIColor.blackColor()
         
         addDeckButton = UIButton(type: UIButtonType.ContactAdd)
-        addDeckButton.tintColor = UIColor.whiteColor()
+        addDeckButton.tintColor = UIColor.lightTextColor()
+        addDeckButton.addTarget(self, action: "addDeckButtonPressed:", forControlEvents: .TouchUpInside)
         
         NSNotificationCenter.defaultCenter().addObserver(self,
             selector: "persistentStoreDidChange:",
@@ -85,14 +111,38 @@ class CardListViewController: UIViewController {
             object: self.coreDataStack.context.persistentStoreCoordinator)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if fetchedResultsController.sections![0].numberOfObjects != 0 {
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            currentIndexPath = indexPath
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Bottom)
+            let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
+            currentDeck = deck
+        }
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
+        
+        currentIndexPath = nil
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.context.persistentStoreCoordinator)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context.persistentStoreCoordinator)
     }
-
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if currentDeck != nil {
+            cardAddButtonView.frame = CGRect(x: 0, y: self.view.frame.size.height - kCardAddButtonViewHeight, width: self.view.frame.size.width, height: kCardAddButtonViewHeight)
+        } else {
+            cardAddButtonView.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: kCardAddButtonViewHeight)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,10 +153,10 @@ class CardListViewController: UIViewController {
     private func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
         cell.textLabel!.text = deck.name
-        cell.textLabel!.highlightedTextColor = UIColor.blackColor()
+        cell.textLabel!.highlightedTextColor = currentColor
         let cardsCount = deck.cards?.count ?? 0
-        cell.detailTextLabel!.text = (cardsCount == 0) ? "\(cardsCount) card" : "\(cardsCount) cards"
-        cell.detailTextLabel!.highlightedTextColor = UIColor.blackColor()
+        cell.detailTextLabel!.text = (cardsCount < 2) ? "\(cardsCount) card" : "\(cardsCount) cards"
+        cell.detailTextLabel!.highlightedTextColor = currentColor
         
         cell.backgroundColor = UIColor.clearColor()
     }
@@ -132,13 +182,41 @@ class CardListViewController: UIViewController {
         }
     }
     
+    private func animateCardAddButtonView() {
+        UIView.animateWithDuration(0.5) { () -> Void in
+            if self.currentDeck != nil {
+                self.cardAddButtonView.frame = CGRect(x: 0, y: self.view.frame.size.height - kCardAddButtonViewHeight, width: self.view.frame.size.width, height: kCardAddButtonViewHeight)
+            } else {
+                self.cardAddButtonView.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: kCardAddButtonViewHeight)
+            }
+        }
+    }
+    
+    private func setLayoutOfSubView(size: CGSize? = nil) {
+        
+        let viewSize = size ?? self.view.frame.size
+        let w = self.currentSizeClasses.w
+        let h = self.currentSizeClasses.h
+        
+        switch (w, h) {
+        case (.Regular, .Regular):
+            sizeClassesAdaptor.setWidthRegularHeightRegularLayoutWith(viewSize: viewSize)
+        case (.Compact, .Regular):
+            sizeClassesAdaptor.setWidthCompactHeightRegularLayoutWith(viewSize: viewSize)
+        case (.Regular, .Compact):
+            sizeClassesAdaptor.setWidthRegularHeightCompactLayoutWith(viewSize: viewSize)
+        case (.Compact, .Compact):
+            sizeClassesAdaptor.setWidthCompactHeightCompactLayoutWith(viewSize: viewSize)
+        default:
+            NSLog("Unspecified size classes")
+            break
+        }
+    }
+
+    
     // MARK: - UIResponder
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        
-        addButtonPressed(UIBarButtonItem())
-        return
-        
         if #available(iOS 9.0, *) {
             if motion != .MotionShake { return }
             
@@ -270,11 +348,18 @@ extension CardListViewController: UITableViewDelegate {
             
             let deleteAction = UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction) -> Void in
                 
+                if let cards = deckToRemove.cards {
+                    for card in cards {
+                        self.fetchedResultsController.managedObjectContext.deleteObject(card as! NSManagedObject)
+                    }
+                }
                 self.fetchedResultsController.managedObjectContext.deleteObject(deckToRemove)
                 
                 do {
                     try self.fetchedResultsController.managedObjectContext.save()
+                    self.currentDeck = nil
                     print("Delete")
+                    
                 } catch let error as NSError {
                     print("Could not save: \(error)")
                 }
@@ -296,6 +381,7 @@ extension CardListViewController: UITableViewDelegate {
             
             presentViewController(alert, animated: true, completion: nil)
         }
+
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -303,8 +389,13 @@ extension CardListViewController: UITableViewDelegate {
         
         let deck = fetchedResultsController.objectAtIndexPath(indexPath) as! Deck
         currentDeck = deck
+        currentIndexPath = indexPath
+//        cardReviewManager.presentCardReviewController(deck)
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.textLabel?.highlightedTextColor = currentColor
+        cell?.detailTextLabel?.highlightedTextColor = currentColor
+        
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.whiteColor()
         cell?.selectedBackgroundView = backgroundView
@@ -312,7 +403,16 @@ extension CardListViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        currentDeck = nil
+        currentColor = UIColor.RandomKMColor()
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath == currentIndexPath {
+            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .Bottom)
+            currentDeck = fetchedResultsController.objectAtIndexPath(indexPath) as? Deck
+            configureCell(cell, atIndexPath: indexPath)
+        }
     }
 
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -321,10 +421,9 @@ extension CardListViewController: UITableViewDelegate {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = footerView.bounds
         gradientLayer.colors = [UIColor.clearColor(), UIColor.blackColor().CGColor]
-        
         footerView.layer.insertSublayer(gradientLayer, atIndex: 0)
-        footerView.addSubview(addDeckButton)
         
+        footerView.addSubview(addDeckButton)
         let centerX = NSLayoutConstraint(item: addDeckButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: footerView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         let centerY = NSLayoutConstraint(item: addDeckButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: footerView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
         addDeckButton.translatesAutoresizingMaskIntoConstraints = false
@@ -349,12 +448,12 @@ extension CardListViewController: NSFetchedResultsControllerDelegate {
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         
         switch type {
-        case .Insert:
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         case .Update:
             self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: .None)
+        case .Insert:
+            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+        case .Delete:
+            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
         case .Move:
             self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
@@ -381,12 +480,35 @@ extension CardListViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+// MARK: - SizeClassesAdaptor
+extension CardListViewController: SizeClassesAdaptor {
+    // iPad - Portrait & Landscape
+    func setWidthRegularHeightRegularLayoutWith(viewSize size: CGSize) {
+        cardAddButtonView.hidden = false
+    }
+
+    // iPhone 6 Plus - Portrait
+    // iPhone 6 and Before - Portrait
+    func setWidthCompactHeightRegularLayoutWith(viewSize size: CGSize) {
+        cardAddButtonView.hidden = true
+    }
+    
+    // iPhone 6 Plus - Landscape
+    func setWidthRegularHeightCompactLayoutWith(viewSize size: CGSize) {
+        cardAddButtonView.hidden = false
+    }
+    
+    // iPhone 6 and Before - Landscape
+    func setWidthCompactHeightCompactLayoutWith(viewSize size: CGSize) {
+        cardAddButtonView.hidden = true
+    }
+}
+
 
 // MARK: - CardAddingManager
 extension CardListViewController: CardAddingManager {
-    func presentCardAddController() {
-        guard let currentDeck = currentDeck else {
-            NSLog("No deck selected")
+    func presentCardAddController(fromController: UIViewController?) {
+        guard let currentDeck = currentDeck where isActive == true else {
             return
         }
         
@@ -400,7 +522,7 @@ extension CardListViewController: CardAddingManager {
             textField.placeholder = "Card back…"
         }
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) -> Void in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction) -> Void in
             
             print("Cancel")
         }))
@@ -408,6 +530,7 @@ extension CardListViewController: CardAddingManager {
             
             print("Card saved")
             
+            let model = MoccacinoMemoryModel.shared
             let context = self.coreDataStack.context
             let cardEntity = NSEntityDescription.entityForName("Card", inManagedObjectContext: context)
             let card = Card(entity: cardEntity!, insertIntoManagedObjectContext: context)
@@ -420,12 +543,21 @@ extension CardListViewController: CardAddingManager {
             card.definition = cardBackTextField!.text
             card.currentPeriod = 0
             card.memoryScore = 100
+            card.nextReviewTime = model.caculateNextReviewTimeWith(card)
             
             card.deck = currentDeck
             
             self.coreDataStack.saveContext()
         }))
         
-        presentViewController(alert, animated: true, completion: nil)
+        if fromController != nil {
+            fromController!.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
+}
+
+protocol CardReviewManager {
+    func presentCardReviewController(deck: Deck)
 }

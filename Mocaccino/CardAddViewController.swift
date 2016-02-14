@@ -90,6 +90,7 @@ class CardAddViewController: UIViewController {
 //        view.addGestureRecognizer(pan)
     }
     
+    
     private func creatCardAddView() -> CardAddView? {
         if let view = UINib(nibName: "CardAddView", bundle: nil).instantiateWithOwner(nil, options: nil).first as! CardAddView? {
             view.frame = CGRect(x: 0, y: 0, width: kCardAddViewWidth, height: kCardAddViewHeight)
