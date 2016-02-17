@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CoreDataStack.swift"
-            timestampString = "476445124.954677"
+            timestampString = "477397394.794344"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "psc"
             landmarkType = "19">
             <Actions>
@@ -60,7 +60,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardListViewController.swift"
-            timestampString = "477099443.920451"
+            timestampString = "477397896.309197"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
@@ -156,11 +156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardListViewController.swift"
-            timestampString = "477136760.627603"
+            timestampString = "477401034.630659"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "564"
-            endingLineNumber = "564"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
             landmarkName = "presentCardAddController(_:)"
             landmarkType = "5">
             <Actions>
