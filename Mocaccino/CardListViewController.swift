@@ -27,6 +27,18 @@ class CardListViewController: UIViewController {
             NSNotificationCenter.defaultCenter().postNotificationName("CardListActiveStatusChange", object: isActive)
         }
     }
+    var persistentStorCoordinatorChangesObserver: NSNotificationCenter? = nil {
+        didSet {
+            oldValue?.removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context)
+            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: "persistentStoreDidimportUbiquitousContentChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context)
+            
+            oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
+            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: "persistentStoreWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
+            
+            oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: coreDataStack.psc)
+            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: "persistentStoreDidChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
+        }
+    }
     var currentColor: UIColor! {
         didSet {
             cardAddButtonView.backgroundColor = currentColor
@@ -85,7 +97,6 @@ class CardListViewController: UIViewController {
         navigationController?.navigationBarHidden = true
         
         setupFetchedResultsController()
-        refetchData()
         
         cardAddButtonView.frame = CGRect(x: 0, y: self.view.frame.size.height, width: self.view.frame.size.width, height: kCardAddButtonViewHeight)
         self.view.addSubview(cardAddButtonView)
@@ -96,23 +107,21 @@ class CardListViewController: UIViewController {
         addDeckButton = UIButton(type: UIButtonType.ContactAdd)
         addDeckButton.tintColor = UIColor.lightTextColor()
         addDeckButton.addTarget(self, action: "addDeckButtonPressed:", forControlEvents: .TouchUpInside)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "persistentStoreDidChange:",
-            name: NSPersistentStoreCoordinatorStoresDidChangeNotification,
-            object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "persistentStoreWillChange:",
-            name: NSPersistentStoreCoordinatorStoresWillChangeNotification,
-            object: self.coreDataStack.context.persistentStoreCoordinator)
-        NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "recieveICloudChanges:",
-            name: NSPersistentStoreDidImportUbiquitousContentChangesNotification,
-            object: self.coreDataStack.context.persistentStoreCoordinator)
+    
+        persistentStorCoordinatorChangesObserver = NSNotificationCenter.defaultCenter()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        fetchData()
+        tableView.reloadData()
+        isActive = true
+        coreDataStack.updateContextWithUbiquitousContentUpdates = true
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         
         if fetchedResultsController.sections![0].numberOfObjects != 0 {
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -124,13 +133,10 @@ class CardListViewController: UIViewController {
     }
     
     override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(true)
+        super.viewWillDisappear(animated)
         
         currentIndexPath = nil
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.context.persistentStoreCoordinator)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context.persistentStoreCoordinator)
+        persistentStorCoordinatorChangesObserver = nil
     }
     
     override func viewWillLayoutSubviews() {
@@ -173,7 +179,7 @@ class CardListViewController: UIViewController {
         self.fetchedResultsController.delegate = self
     }
     
-    private func refetchData() {
+    private func fetchData() {
         do {
             NSLog("Try to refetch data")
             try self.fetchedResultsController.performFetch()
@@ -268,59 +274,33 @@ class CardListViewController: UIViewController {
 // MARK: - iCloud observer
 
 extension CardListViewController {
-    func persistentStoreDidChange (notification: NSNotification) {
-        NSLog("PersistenStore did change")
+    @objc func persistentStoreDidimportUbiquitousContentChanges(notification: NSNotification) {
         
-        if let userInfo = notification.userInfo,
-        let transitionType = userInfo[NSPersistentStoreUbiquitousTransitionTypeKey] as? NSNumber {
-            switch transitionType {
-            case NSPersistentStoreUbiquitousTransitionType.AccountAdded.rawValue: break
-            case NSPersistentStoreUbiquitousTransitionType.AccountRemoved.rawValue: break
-            case NSPersistentStoreUbiquitousTransitionType.ContentRemoved.rawValue: break
-            case NSPersistentStoreUbiquitousTransitionType.InitialImportCompleted.rawValue: break
-                
-            default:
-                break
-            }
-        }
+//        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+//            
+//            self.tableView.reloadData()
+//        }
+    }
+    
+    @objc func persistentStoreDidChange(notification: NSNotification) {
+        
+        fetchData()
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.refetchData()
+            
             self.tableView.reloadData()
             self.isActive = true
         }
     }
     
-    func persistentStoreWillChange (notification:NSNotification) {
-        NSLog("PersistenStore will change")
+    @objc func persistentStoreWillChange(notification:NSNotification) {
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            let moc = self.fetchedResultsController.managedObjectContext
             
             // Disable user interface with setEnabled: or an overlay
             self.isActive = false
             
-            moc.performBlock { () -> Void in
-                if moc.hasChanges {
-                    do {
-                        try moc.save()
-                    } catch {
-                        print("Could not save changes")
-                    }
-                } else {
-                    // Drop any managed object references
-                    moc.reset()
-                }
-            }
         }   // dispatch_async(…) { }
-    }
-    
-    func recieveICloudChanges (notification:NSNotification){
-        NSLog("Recieve iCloud change")
-        let moc = self.fetchedResultsController.managedObjectContext
-        moc.performBlock { () -> Void in
-            moc.mergeChangesFromContextDidSaveNotification(notification)
-        }
     }
 }
 
@@ -524,6 +504,7 @@ extension CardListViewController: SizeClassesAdaptor {
 // MARK: - CardAddingManager
 extension CardListViewController: CardAddingManager {
     func presentCardAddController(fromController: UIViewController?) {
+        NSLog("present card add controller")
         guard let currentDeck = currentDeck where isActive == true else {
             return
         }
@@ -547,9 +528,10 @@ extension CardListViewController: CardAddingManager {
             print("Card saved")
             
             let model = MoccacinoMemoryModel.shared
-            let context = self.coreDataStack.context
+            let context = self.fetchedResultsController.managedObjectContext
             let cardEntity = NSEntityDescription.entityForName("Card", inManagedObjectContext: context)
-            let card = Card(entity: cardEntity!, insertIntoManagedObjectContext: context)
+//            let card = Card(entity: cardEntity!, insertIntoManagedObjectContext: context)
+            let card = NSEntityDescription.insertNewObjectForEntityForName(cardEntity!.name!, inManagedObjectContext: context) as! Card
             
             let cardFrontTextField = alert.textFields!.first
             let cardBackTextField = alert.textFields!.last

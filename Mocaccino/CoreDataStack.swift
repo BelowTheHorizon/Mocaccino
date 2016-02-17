@@ -8,11 +8,31 @@
 
 import CoreData
 
-class CoreDataStack {
+final class CoreDataStack {
     var modelName: String
     var storeName: String
     var options: [NSObject : AnyObject]? = nil
     var finaliCloudURL: NSURL?
+    
+    // Flag of listening notification or not
+    var updateContextWithUbiquitousContentUpdates: Bool = false {
+        willSet {
+            ubiquitousChangesObserver = newValue ? NSNotificationCenter.defaultCenter() : nil
+        }
+    }
+    
+    private var ubiquitousChangesObserver: NSNotificationCenter? {
+        didSet {
+            oldValue?.removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: psc)
+            ubiquitousChangesObserver?.addObserver(self, selector: "persistentStoreDidimportUbiquitousContentChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: psc)
+            
+            oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
+            ubiquitousChangesObserver?.addObserver(self, selector: "persistentStoreCoordinatorWillChangeStores:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
+            
+            oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: psc)
+            ubiquitousChangesObserver?.addObserver(self, selector: "persistentStoreCoordinatorDidChangeStores:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
+        }
+    }
     
     init(modelName: String, storeName: String, options: ([NSObject : AnyObject])?) {
         self.modelName = modelName
@@ -31,9 +51,9 @@ class CoreDataStack {
         return managedObjectContext
     }()
     
-    private lazy var psc: NSPersistentStoreCoordinator = {
+    lazy var psc: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.finaliCloudURL ?? self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.modelName + ".sqlite")
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.modelName + ".sqlite")
         
         do {
             let store: NSPersistentStore = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: self.options)
@@ -59,5 +79,29 @@ class CoreDataStack {
                 abort()
             }
         }   // if …
+    }
+    
+    @objc func persistentStoreDidimportUbiquitousContentChanges(notification: NSNotification) {
+        NSLog("Merging ubiquitous content changes")
+        context.performBlock { () -> Void in
+            self.context.mergeChangesFromContextDidSaveNotification(notification)
+        }
+    }
+    
+    @objc func persistentStoreCoordinatorWillChangeStores(notification: NSNotification) {
+        NSLog("NSPersistentStoreCoordinator will change")
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("Error saving \(error)")
+            }
+        }
+        
+        context.reset()
+    }
+    
+    @objc func persistentStoreCoordinatorDidChangeStores(notification: NSNotification) {
+        NSLog("NSPersistentStoreCoordinator did change")
     }
 }
