@@ -188,6 +188,38 @@ class CardListViewController: UIViewController {
         }
     }
     
+    private func deleteAllCard() {
+        
+        let alert = UIAlertController(title: "Delete all card", message: "Are you sure?", preferredStyle: .Alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action: UIAlertAction) -> Void in
+            let fetchRequest = NSFetchRequest(entityName: "Card")
+            if #available(iOS 9.0, *) {
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                deleteRequest.resultType = .ResultTypeCount
+                do {
+                    let deleteResult = try self.fetchedResultsController.managedObjectContext.executeRequest(deleteRequest) as! NSBatchDeleteResult
+                    print("Delete \(deleteResult.result!) record(s)")
+                    try self.fetchedResultsController.performFetch()
+                } catch let error as NSError {
+                    print("Could not delete, \(error.userInfo)")
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+
+            } else {
+                // Fallback on earlier versions
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
     private func animateCardAddButtonView() {
         UIView.animateWithDuration(0.5) { () -> Void in
             if self.currentDeck != nil {
@@ -226,7 +258,7 @@ class CardListViewController: UIViewController {
         if #available(iOS 9.0, *) {
             if motion != .MotionShake { return }
             
-            let alert = UIAlertController(title: "Delete All?", message: nil, preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Debug menu", message: nil, preferredStyle: .Alert)
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) -> Void in
                 
@@ -234,30 +266,23 @@ class CardListViewController: UIViewController {
             }))
             alert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction) -> Void in
                 
-                let fetchRequest = NSFetchRequest(entityName: "Card")
-                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-                deleteRequest.resultType = .ResultTypeCount
-                do {
-                    let deleteResult = try self.fetchedResultsController.managedObjectContext.executeRequest(deleteRequest) as! NSBatchDeleteResult
-                    print("Delete \(deleteResult.result!) record(s)")
-                    try self.fetchedResultsController.performFetch()
-                } catch let error as NSError {
-                    print("Could not delete, \(error.userInfo)")
-                }
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
+                self.deleteAllCard()
             }))
             alert.addAction(UIAlertAction(title: "Print", style: .Default, handler: { (action: UIAlertAction) -> Void in
-                print("Card print\n----\n")
+                print("Card printing\n----\n")
                 
                 let fetchRequest = NSFetchRequest(entityName: "Card")
                 
                 do {
                     let cards = try self.coreDataStack.context.executeFetchRequest(fetchRequest) as! [Card]
                     for card in cards {
-                        print(card)
+                        print(card.title!,
+                              card.definition!,
+                              card.deck?.name ?? "(deck name)",
+                              card.currentPeriod ?? "(currentPeriod)",
+                              card.memoryScore ?? "(memoryScore)", separator: ", ")
+                        print(card.timeStamp ?? "(timeStamp)",
+                              card.nextReviewTime ?? "(nextReviewTime)")
                     }
                     print("\n----\nEnd")
                 } catch let error as NSError {

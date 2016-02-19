@@ -30,8 +30,16 @@ class CardBackView: UIView {
         cardEventmanager?.forgetButtonPressed(card!)
     }
     
-    @IBAction func forgetButtonLongPressed(sender: UILongPressGestureRecognizer) {
+    @IBAction func frontTextLabelLongPressed(sender: UILongPressGestureRecognizer) {
         cardEventmanager?.forgetButtonLongPressed(card!)
+    }
+    
+    @IBAction func frontTextLabelTapped(sender: UITapGestureRecognizer) {
+        cardEventmanager?.speak(frontTextLabel.text)
+    }
+    
+    @IBAction func backTextLabelTapped(sender: UITapGestureRecognizer) {
+        cardEventmanager?.speak(backTextLabel.text)
     }
     
     override func layoutSubviews() {
@@ -61,4 +69,5 @@ protocol CardEventManager {
     func rememberButtonPressed(card: Card)
     func forgetButtonPressed(card: Card)
     func forgetButtonLongPressed(card: Card)
+    func speak(string: String?)
 }

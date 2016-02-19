@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 import CoreData
 
 class CardReviewViewController: UIViewController {
@@ -35,6 +36,8 @@ class CardReviewViewController: UIViewController {
         let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapped"))
         singleTap.numberOfTapsRequired = 1
         cardFrontView.addGestureRecognizer(singleTap)
+        
+        cardFrontView.cardEventmanager = self
         cardBackView.cardEventmanager = self
         
         configureCardView(card)
@@ -151,6 +154,55 @@ extension CardReviewViewController: CardEventManager {
     func forgetButtonLongPressed(card: Card) {
         deleteCard(card)
     }
+    
+    func speak(string: String?) {
+        guard let string = string else {
+            return
+        }
+        
+        if #available(iOS 9.0, *) {
+            let voice = AVSpeechSynthesisVoice(identifier: AVSpeechSynthesisVoiceIdentifierAlex)
+            let synth = AVSpeechSynthesizer()
+            
+            synth.delegate = self
+            
+            let utter = AVSpeechUtterance(string: string)
+            utter.voice = voice
+            NSLog("Speak \(utter)")
+            synth.speakUtterance(utter)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+
+}
+
+// TODO: - AVSpeechSynthesizerDelegate
+extension CardReviewViewController: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didCancelSpeechUtterance utterance: AVSpeechUtterance) {
+        print("didCancelSpeechUtterance")
+    }
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didPauseSpeechUtterance utterance: AVSpeechUtterance) {
+        print("didPauseSpeechUtterance")
+    }
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didContinueSpeechUtterance utterance: AVSpeechUtterance) {
+        print("didContinueSpeechUtterance")
+    }
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didFinishSpeechUtterance utterance: AVSpeechUtterance) {
+        print("didFinishSpeechUtterance")
+    }
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, didStartSpeechUtterance utterance: AVSpeechUtterance) {
+        print("didStartSpeechUtterance")
+    }
+    
+    func speechSynthesizer(synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        print("willSpeakRangeOfSpeechString")
+    }
+    
 }
 
 protocol CardReviewCoordinator {

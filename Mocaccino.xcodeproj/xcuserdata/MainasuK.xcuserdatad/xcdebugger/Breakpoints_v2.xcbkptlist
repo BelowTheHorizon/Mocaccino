@@ -156,11 +156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardListViewController.swift"
-            timestampString = "477401034.630659"
+            timestampString = "477561656.680694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
             landmarkName = "presentCardAddController(_:)"
             landmarkType = "5">
             <Actions>
@@ -186,7 +186,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
-            landmarkName = "forgetButtonLongPressed(_:)"
+            landmarkName = "frontTextLabelLongPressed(_:)"
             landmarkType = "5">
             <Actions>
                <BreakpointActionProxy
@@ -256,11 +256,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardListViewController.swift"
-            timestampString = "477402215.673652"
+            timestampString = "477561656.680694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "persistentStoreDidimportUbiquitousContentChanges(_:)"
             landmarkType = "5">
             <Actions>
@@ -278,6 +278,119 @@
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "Yes"
+            filePath = "Mocaccino/CardBackView.swift"
+            timestampString = "477560044.820924"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "frontTextLabelTapped(_:)"
+            landmarkType = "5">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  <ActionContent
+                     message = "%B:"
+                     conveyanceType = "0">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "Yes"
+            filePath = "Mocaccino/CardBackView.swift"
+            timestampString = "477560065.120774"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "backTextLabelTapped(_:)"
+            landmarkType = "5">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  <ActionContent
+                     message = "%B:"
+                     conveyanceType = "0">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Mocaccino/CardReviewViewController.swift"
+            timestampString = "477563720.18485"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "speak(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mocaccino.CardReviewViewController.speak (Mocaccino.CardReviewViewController)(Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardReviewViewController.swift"
+                  timestampString = "477563765.509849"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "protocol witness for Mocaccino.CardEventManager.speak &lt;A where A: Mocaccino.CardEventManager&gt; (A)(Swift.Optional&lt;Swift.String&gt;) -&gt; () in conformance Mocaccino.CardReviewViewController : Mocaccino.CardEventManager in Mocaccino"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardReviewViewController.swift"
+                  timestampString = "477563765.510099"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "dynamic Mocaccino.CardReviewViewController.speak (Mocaccino.CardReviewViewController)(Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardReviewViewController.swift"
+                  timestampString = "477563765.510281"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
