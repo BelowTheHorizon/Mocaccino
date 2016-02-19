@@ -11,14 +11,18 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Front" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="4rx-pR-CKn">
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Front" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="4rx-pR-CKn">
                     <rect key="frame" x="117" y="84" width="66" height="33"/>
+                    <gestureRecognizers/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                     <variation key="heightClass=regular-widthClass=regular">
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="46"/>
                     </variation>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="JZU-cq-Oto" appends="YES" id="Vdk-mg-Xjh"/>
+                    </connections>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,5 +38,10 @@
                 <outlet property="frontTextLabel" destination="4rx-pR-CKn" id="w3N-If-DK9"/>
             </connections>
         </view>
+        <tapGestureRecognizer id="JZU-cq-Oto">
+            <connections>
+                <action selector="frontTextLabelTapped:" destination="iN0-l3-epB" id="wHj-0N-JXs"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

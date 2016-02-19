@@ -164,6 +164,7 @@ extension CardDetailViewController: CardReviewCoordinator {
 
 // MARK: - Notification selector
 extension CardDetailViewController {
+    // FIXME: 
     func isActiveChanged(notification: NSNotification) {
         guard let isActive = notification.object as? Bool else {
             return
