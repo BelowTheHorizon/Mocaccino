@@ -40,16 +40,43 @@ class CoreDataStack {
         self.options = options
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     private lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
     }()
     
-    lazy var context: NSManagedObjectContext = {
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = self.psc
-        return managedObjectContext
+    /// Root context
+    lazy var rootContext: NSManagedObjectContext = {
+        var moc = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        moc.persistentStoreCoordinator = self.psc
+        // Giving priority to in-memory changes
+        moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        
+        return moc
     }()
+    
+    /// Main context
+    lazy var context: NSManagedObjectContext = {
+        var moc = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        moc.parentContext = self.rootContext
+        moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mainContextDidSave:", name: NSManagedObjectContextDidSaveNotification, object: moc)
+        
+        return moc
+    }()
+    
+    func newDerivedContext() -> NSManagedObjectContext {
+        let moc = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        moc.parentContext = self.context
+        moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        
+        return moc
+    }
     
     lazy var psc: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
@@ -70,15 +97,46 @@ class CoreDataStack {
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
     
-    func saveContext() {
-        if context.hasChanges {
+    // Ref: *Core Data by Tutorials*
+    func saveContext(context moc: NSManagedObjectContext) {
+        guard moc.parentContext !== self.context else {
+            self.saveDerivedContext(context: moc)
+            return
+        }
+        
+        moc.performBlock() {
             do {
-                try context.save()
-            } catch let error as NSError {
-                print("Error: \(error.localizedDescription)")
+                try moc.obtainPermanentIDsForObjects(Array(moc.insertedObjects))
+            } catch {
+                NSLog("Error obtaining permanent IDs for \(moc.insertedObjects), \(error)")
+            }
+            
+            do {
+                try moc.save()
+            } catch {
+                NSLog("Unresolved core data error: \(error)")
                 abort()
             }
-        }   // if …
+        }
+    }
+    
+    func saveDerivedContext(context moc: NSManagedObjectContext) {
+        moc.performBlock() {
+            do {
+                try moc.obtainPermanentIDsForObjects(Array(moc.insertedObjects))
+            } catch {
+                NSLog("Error obtaining permanent IDs for \(moc.insertedObjects), \(error)")
+            }
+            
+            do {
+                try moc.save()
+            } catch {
+                NSLog("Unresolved core data error: \(error)")
+                abort()
+            }
+        }
+        
+        self.saveContext(context: self.context)
     }
     
     @objc func persistentStoreDidimportUbiquitousContentChanges(notification: NSNotification) {
@@ -103,5 +161,9 @@ class CoreDataStack {
     
     @objc func persistentStoreCoordinatorDidChangeStores(notification: NSNotification) {
         NSLog("NSPersistentStoreCoordinator did change")
+    }
+    
+    @objc func mainContextDidSave(notification: NSNotification) {
+        self.saveContext(context: self.rootContext)
     }
 }

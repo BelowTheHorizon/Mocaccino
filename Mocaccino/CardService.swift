@@ -24,7 +24,7 @@ class CardService {
         card.definition = definition
         card.deck = deck
         
-        coreDataStack.saveContext()
+        coreDataStack.saveContext(context: managedObjectContext)
         
         return card
     }

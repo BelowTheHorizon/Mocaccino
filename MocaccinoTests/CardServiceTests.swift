@@ -44,4 +44,17 @@ class CardServiceTests: XCTestCase {
         XCTAssertNil(card?.deck)
     }
     
+    func testRootContextIsSavedAfterAddCard() {
+        expectationForNotification(NSManagedObjectContextDidSaveNotification, object: coreDataStack.rootContext) { (notification: NSNotification) -> Bool in
+            
+            return true
+        }
+        
+        cardService.addCard("Mocaccino", definition: "摩卡", inDeck: nil)
+        
+        waitForExpectationsWithTimeout(2.0) { (error: NSError?) -> Void in
+            
+            XCTAssertNil(error, "Save did not occur")
+        }
+    }
 }

@@ -11,6 +11,7 @@ import CoreData
 @testable import Mocaccino
 
 class TestCoreDataStack: CoreDataStack {
+    
     init() {
         super.init(modelName: "Mocaccino", storeName: "Mocaccino", options: nil)
         self.psc = {

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CoreDataStack.swift"
-            timestampString = "477397394.794344"
+            timestampString = "477647885.312429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "psc"
             landmarkType = "19">
             <Actions>
@@ -60,11 +60,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardListViewController.swift"
-            timestampString = "477397896.309197"
+            timestampString = "477647885.312429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "CardListViewController"
             landmarkType = "3">
             <Actions>
@@ -156,11 +156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardListViewController.swift"
-            timestampString = "477561656.680694"
+            timestampString = "477647885.312429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "571"
-            endingLineNumber = "571"
+            startingLineNumber = "574"
+            endingLineNumber = "574"
             landmarkName = "presentCardAddController(_:)"
             landmarkType = "5">
             <Actions>
@@ -256,11 +256,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardListViewController.swift"
-            timestampString = "477561656.680694"
+            timestampString = "477647885.312429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
             landmarkName = "persistentStoreDidimportUbiquitousContentChanges(_:)"
             landmarkType = "5">
             <Actions>
