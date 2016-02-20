@@ -206,11 +206,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardDetailViewController.swift"
-            timestampString = "477136070.113732"
+            timestampString = "477648346.637312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "willShowCardBack()"
             landmarkType = "5">
             <Actions>
@@ -231,11 +231,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "Mocaccino/CardDetailViewController.swift"
-            timestampString = "477136070.113732"
+            timestampString = "477648346.637312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "willHideCardBack()"
             landmarkType = "5">
             <Actions>
