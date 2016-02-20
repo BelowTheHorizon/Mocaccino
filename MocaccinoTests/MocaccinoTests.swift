@@ -6,19 +6,28 @@
 //  Copyright © 2016年 Cirno MainasuK. All rights reserved.
 //
 
+import UIKit
+import CoreData
 import XCTest
 @testable import Mocaccino
 
 class MocaccinoTests: XCTestCase {
+    var cardService: CardService!
+    var coreDataStack: CoreDataStack!
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        
+        coreDataStack = TestCoreDataStack()
+        cardService = CardService(managedObjectContext: coreDataStack.context, coreDataStack: coreDataStack)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        
+        cardService = nil
+        coreDataStack = nil
     }
     
     func testExample() {

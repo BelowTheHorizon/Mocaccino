@@ -15,13 +15,15 @@ private let kCardAddButtonViewHeight: CGFloat = 44.0
 class CardListViewController: UIViewController {
     
     let cardAddButtonView = UINib(nibName: "CardAddButtonView", bundle: nil).instantiateWithOwner(nil, options: nil).first as! CardAddButtonView!
-    
+
     @IBOutlet weak var tableView: UITableView!
     var addDeckButton: UIButton!
     var sizeClassesAdaptor: SizeClassesAdaptor!
     var cardReviewManager: CardReviewManager!
+    // TODO: Move to service
     var coreDataStack: CoreDataStack!
     var fetchedResultsController: NSFetchedResultsController!
+
     var isActive: Bool = false {
         didSet {
             NSNotificationCenter.defaultCenter().postNotificationName("CardListActiveStatusChange", object: isActive)
@@ -55,7 +57,7 @@ class CardListViewController: UIViewController {
             setLayoutOfSubView()
         }
     }
-    
+    // FIXME: 
     func addDeckButtonPressed(sender: UIButton? = nil) {
         let alert = UIAlertController(title: "New Deck", message: "Add a new deck", preferredStyle: .Alert)
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField) -> Void in
@@ -79,7 +81,7 @@ class CardListViewController: UIViewController {
             deck.name = deckNameTextField!.text
             deck.timeStamp = NSDate()
             
-            self.coreDataStack.saveContext()
+            self.coreDataStack.saveContext(context: self.coreDataStack.context)
             self.tableView.reloadData()
         }))
         
@@ -528,6 +530,7 @@ extension CardListViewController: SizeClassesAdaptor {
 
 // MARK: - CardAddingManager
 extension CardListViewController: CardAddingManager {
+    // FIXME:
     func presentCardAddController(fromController: UIViewController?) {
         NSLog("present card add controller")
         guard let currentDeck = currentDeck where isActive == true else {
@@ -570,7 +573,7 @@ extension CardListViewController: CardAddingManager {
             
             card.deck = currentDeck
             
-            self.coreDataStack.saveContext()
+            self.coreDataStack.saveContext(context: self.coreDataStack.context)
         }))
         
         if fromController != nil {
