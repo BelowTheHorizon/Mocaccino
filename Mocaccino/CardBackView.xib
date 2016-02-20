@@ -66,13 +66,17 @@
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cVW-fv-l0c" secondAttribute="trailing" id="6ig-w7-Qn8"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2e6-ra-9L5" secondAttribute="trailing" constant="20" symbolic="YES" id="7zk-lf-put"/>
+                <constraint firstItem="2e6-ra-9L5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="8L1-jM-iwC"/>
                 <constraint firstAttribute="bottom" secondItem="cVW-fv-l0c" secondAttribute="bottom" id="Efv-OW-AsM"/>
                 <constraint firstItem="IKU-q5-5jE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fnf-OW-gPh"/>
                 <constraint firstItem="cVW-fv-l0c" firstAttribute="leading" secondItem="IKU-q5-5jE" secondAttribute="trailing" id="Ls2-RZ-SFP"/>
+                <constraint firstItem="6T9-R4-V0E" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="OTY-Zl-7X2"/>
                 <constraint firstItem="6T9-R4-V0E" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ved-Ed-JIj"/>
                 <constraint firstItem="cVW-fv-l0c" firstAttribute="height" secondItem="IKU-q5-5jE" secondAttribute="height" id="YHs-HO-Ajr"/>
                 <constraint firstItem="cVW-fv-l0c" firstAttribute="width" secondItem="IKU-q5-5jE" secondAttribute="width" id="Zoc-yz-QzQ"/>
                 <constraint firstItem="2e6-ra-9L5" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="frL-Eo-0vw"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6T9-R4-V0E" secondAttribute="trailing" constant="20" symbolic="YES" id="j0E-mt-Mfp"/>
                 <constraint firstItem="2e6-ra-9L5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oDv-z2-xI2"/>
                 <constraint firstItem="2e6-ra-9L5" firstAttribute="top" secondItem="6T9-R4-V0E" secondAttribute="bottom" constant="8" symbolic="YES" id="psm-mz-z7t"/>
                 <constraint firstAttribute="bottom" secondItem="IKU-q5-5jE" secondAttribute="bottom" id="tfm-lN-hNB"/>
