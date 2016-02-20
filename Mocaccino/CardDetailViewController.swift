@@ -102,6 +102,7 @@ class CardDetailViewController: UIViewController {
         let currentDate = NSDate()
         let predicate = NSPredicate(format: "nextReviewTime <= %@", currentDate)
         fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = 1
         
         do {
             let cards = try coreDataStack.context.executeFetchRequest(fetchRequest) as! [Card]
