@@ -1,5 +1,5 @@
 //
-//  CardService.swift
+//  DeckService.swift
 //  Mocaccino
 //
 //  Created by Cirno MainasuK on 2016-2-20.
@@ -8,8 +8,8 @@
 
 import CoreData
 
-// TODO: 
-class CardService {
+// TODO:
+class DeckService {
     let managedObjectContext: NSManagedObjectContext
     let coreDataStack: CoreDataStack
     
@@ -18,14 +18,13 @@ class CardService {
         self.coreDataStack = coreDataStack
     }
     
-    func addCard(title: String, definition: String, inDeck deck: Deck?) -> Card {
-        let card = NSEntityDescription.insertNewObjectForEntityForName("Card", inManagedObjectContext: managedObjectContext) as! Card
-        card.title = title
-        card.definition = definition
-        card.deck = deck
+    func addDeck(name: String) -> Deck {
+        let deck = NSEntityDescription.insertNewObjectForEntityForName("Deck", inManagedObjectContext: managedObjectContext) as! Deck
+        deck.name = name
+        deck.timeStamp = NSDate()
         
         coreDataStack.saveContext(context: managedObjectContext)
         
-        return card
+        return deck
     }
 }

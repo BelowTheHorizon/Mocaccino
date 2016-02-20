@@ -41,6 +41,8 @@
 		DB77BEE71C6FFB62008F55FE /* CardBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB77BEE61C6FFB62008F55FE /* CardBackView.xib */; };
 		DB77BEE91C6FFC0E008F55FE /* CardFrontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB77BEE81C6FFC0E008F55FE /* CardFrontView.swift */; };
 		DB77BEEB1C6FFC1A008F55FE /* CardBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB77BEEA1C6FFC1A008F55FE /* CardBackView.swift */; };
+		DB7CF6151C7857C400C03E0B /* DeckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7CF6141C7857C400C03E0B /* DeckService.swift */; };
+		DB7CF6171C78594700C03E0B /* DeckServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7CF6161C78594700C03E0B /* DeckServiceTests.swift */; };
 		DBDFF56C1C7806B000856C88 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDFF56B1C7806B000856C88 /* TestCoreDataStack.swift */; };
 		DBDFF56F1C780A3B00856C88 /* CardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDFF56E1C780A3B00856C88 /* CardService.swift */; };
 		DBDFF5721C780E0300856C88 /* CardServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDFF5711C780E0300856C88 /* CardServiceTests.swift */; };
@@ -107,6 +109,8 @@
 		DB77BEE61C6FFB62008F55FE /* CardBackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardBackView.xib; sourceTree = "<group>"; };
 		DB77BEE81C6FFC0E008F55FE /* CardFrontView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFrontView.swift; sourceTree = "<group>"; };
 		DB77BEEA1C6FFC1A008F55FE /* CardBackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBackView.swift; sourceTree = "<group>"; };
+		DB7CF6141C7857C400C03E0B /* DeckService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckService.swift; sourceTree = "<group>"; };
+		DB7CF6161C78594700C03E0B /* DeckServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckServiceTests.swift; sourceTree = "<group>"; };
 		DBDFF56B1C7806B000856C88 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		DBDFF56E1C780A3B00856C88 /* CardService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardService.swift; sourceTree = "<group>"; };
 		DBDFF5711C780E0300856C88 /* CardServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardServiceTests.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 			children = (
 				DB57DBD51C649C940031040E /* CoreDataStack.swift */,
 				DBDFF56E1C780A3B00856C88 /* CardService.swift */,
+				DB7CF6141C7857C400C03E0B /* DeckService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 			children = (
 				DBDFF56B1C7806B000856C88 /* TestCoreDataStack.swift */,
 				DBDFF5711C780E0300856C88 /* CardServiceTests.swift */,
+				DB7CF6161C78594700C03E0B /* DeckServiceTests.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -431,6 +437,7 @@
 				DB750F5F1C6F44C100D7C84B /* UIColor.swift in Sources */,
 				DB455AC81C6B4EFB00DC2A5A /* PageCardReviewViewController.swift in Sources */,
 				DB750F551C6F299200D7C84B /* CardAddButtonView.swift in Sources */,
+				DB7CF6151C7857C400C03E0B /* DeckService.swift in Sources */,
 				DBDFF56F1C780A3B00856C88 /* CardService.swift in Sources */,
 				DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */,
 				DB3B79C61C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel in Sources */,
@@ -457,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7CF6171C78594700C03E0B /* DeckServiceTests.swift in Sources */,
 				DBDFF5721C780E0300856C88 /* CardServiceTests.swift in Sources */,
 				DB57DBB81C6495AD0031040E /* MocaccinoTests.swift in Sources */,
 				DBDFF56C1C7806B000856C88 /* TestCoreDataStack.swift in Sources */,
