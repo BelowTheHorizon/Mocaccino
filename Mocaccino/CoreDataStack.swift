@@ -8,7 +8,7 @@
 
 import CoreData
 
-final class CoreDataStack {
+class CoreDataStack {
     var modelName: String
     var storeName: String
     var options: [NSObject : AnyObject]? = nil
@@ -65,7 +65,7 @@ final class CoreDataStack {
         return coordinator
     }()
     
-    private lazy var managedObjectModel: NSManagedObjectModel = {
+    lazy var managedObjectModel: NSManagedObjectModel = {
         let modelURL = NSBundle.mainBundle().URLForResource(self.modelName, withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()

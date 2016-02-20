@@ -41,6 +41,9 @@
 		DB77BEE71C6FFB62008F55FE /* CardBackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB77BEE61C6FFB62008F55FE /* CardBackView.xib */; };
 		DB77BEE91C6FFC0E008F55FE /* CardFrontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB77BEE81C6FFC0E008F55FE /* CardFrontView.swift */; };
 		DB77BEEB1C6FFC1A008F55FE /* CardBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB77BEEA1C6FFC1A008F55FE /* CardBackView.swift */; };
+		DBDFF56C1C7806B000856C88 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDFF56B1C7806B000856C88 /* TestCoreDataStack.swift */; };
+		DBDFF56F1C780A3B00856C88 /* CardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDFF56E1C780A3B00856C88 /* CardService.swift */; };
+		DBDFF5721C780E0300856C88 /* CardServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDFF5711C780E0300856C88 /* CardServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +107,9 @@
 		DB77BEE61C6FFB62008F55FE /* CardBackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardBackView.xib; sourceTree = "<group>"; };
 		DB77BEE81C6FFC0E008F55FE /* CardFrontView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFrontView.swift; sourceTree = "<group>"; };
 		DB77BEEA1C6FFC1A008F55FE /* CardBackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardBackView.swift; sourceTree = "<group>"; };
+		DBDFF56B1C7806B000856C88 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
+		DBDFF56E1C780A3B00856C88 /* CardService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardService.swift; sourceTree = "<group>"; };
+		DBDFF5711C780E0300856C88 /* CardServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				DB4D62661C70224400AF08D1 /* MocaccinoMemoryModel.swift */,
+				DB57DBDB1C64C3360031040E /* CoreData */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -168,9 +175,9 @@
 				DB4D62681C70224A00AF08D1 /* Model */,
 				DB77BEEC1C6FFC2D008F55FE /* View */,
 				DB77BEED1C6FFC3A008F55FE /* Controller */,
-				DB57DBDB1C64C3360031040E /* CoreData */,
-				DB77BEE11C6FF752008F55FE /* Deprecated */,
+				DBDFF56D1C780A1800856C88 /* Services */,
 				DB57DBDC1C64C3470031040E /* Supporting Files */,
+				DB77BEE11C6FF752008F55FE /* Deprecated */,
 			);
 			path = Mocaccino;
 			sourceTree = "<group>";
@@ -178,6 +185,7 @@
 		DB57DBB61C6495AD0031040E /* MocaccinoTests */ = {
 			isa = PBXGroup;
 			children = (
+				DBDFF5701C780C1500856C88 /* Services */,
 				DB57DBB71C6495AD0031040E /* MocaccinoTests.swift */,
 				DB57DBB91C6495AD0031040E /* Info.plist */,
 			);
@@ -200,7 +208,6 @@
 				DB429CF91C68A41500C29E21 /* Deck.swift */,
 				DB57DBD71C64AB6B0031040E /* Card+CoreDataProperties.swift */,
 				DB57DBD81C64AB6B0031040E /* Card.swift */,
-				DB57DBD51C649C940031040E /* CoreDataStack.swift */,
 				DB57DBA61C6495AD0031040E /* Mocaccino.xcdatamodeld */,
 				DB7251681C68F22600A5E848 /* Model.xcmappingmodel */,
 				DB5CE0A61C7057BD00A0F52C /* Model_Version_0.1.0ToModel_Version_0.2.0.xcmappingmodel */,
@@ -257,6 +264,24 @@
 				DB77BEE21C6FF875008F55FE /* CardReviewViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		DBDFF56D1C780A1800856C88 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DB57DBD51C649C940031040E /* CoreDataStack.swift */,
+				DBDFF56E1C780A3B00856C88 /* CardService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		DBDFF5701C780C1500856C88 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DBDFF56B1C7806B000856C88 /* TestCoreDataStack.swift */,
+				DBDFF5711C780E0300856C88 /* CardServiceTests.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +431,7 @@
 				DB750F5F1C6F44C100D7C84B /* UIColor.swift in Sources */,
 				DB455AC81C6B4EFB00DC2A5A /* PageCardReviewViewController.swift in Sources */,
 				DB750F551C6F299200D7C84B /* CardAddButtonView.swift in Sources */,
+				DBDFF56F1C780A3B00856C88 /* CardService.swift in Sources */,
 				DB57DBA81C6495AD0031040E /* Mocaccino.xcdatamodeld in Sources */,
 				DB3B79C61C66E5DB007A35B2 /* ModelToModel_Version_0.1.0.xcmappingmodel in Sources */,
 				DB3B79CA1C67BB9F007A35B2 /* RootViewController.swift in Sources */,
@@ -431,7 +457,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBDFF5721C780E0300856C88 /* CardServiceTests.swift in Sources */,
 				DB57DBB81C6495AD0031040E /* MocaccinoTests.swift in Sources */,
+				DBDFF56C1C7806B000856C88 /* TestCoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
