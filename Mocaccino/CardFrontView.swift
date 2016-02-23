@@ -18,7 +18,6 @@ class CardFrontView: UIView {
     var card: Card? {
         didSet {
             updateView()
-            cardEventmanager?.speak(card?.title)
         }
     }
     
