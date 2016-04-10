@@ -30,13 +30,13 @@ class CardListViewController: UIViewController {
     var persistentStorCoordinatorChangesObserver: NSNotificationCenter? = nil {
         didSet {
             oldValue?.removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context)
-            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: "persistentStoreDidimportUbiquitousContentChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context)
+            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: #selector(CardListViewController.persistentStoreDidimportUbiquitousContentChanges(_:)), name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: coreDataStack.context)
             
             oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
-            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: "persistentStoreWillChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
+            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: #selector(CardListViewController.persistentStoreWillChange(_:)), name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
             
             oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: coreDataStack.psc)
-            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: "persistentStoreDidChange:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
+            persistentStorCoordinatorChangesObserver?.addObserver(self, selector: #selector(CardListViewController.persistentStoreDidChange(_:)), name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: coreDataStack.psc)
         }
     }
     var currentColor: UIColor! {
@@ -106,7 +106,7 @@ class CardListViewController: UIViewController {
         
         addDeckButton = UIButton(type: UIButtonType.ContactAdd)
         addDeckButton.tintColor = UIColor.lightTextColor()
-        addDeckButton.addTarget(self, action: "addDeckButtonPressed:", forControlEvents: .TouchUpInside)
+        addDeckButton.addTarget(self, action: #selector(CardListViewController.addDeckButtonPressed(_:)), forControlEvents: .TouchUpInside)
     
         persistentStorCoordinatorChangesObserver = NSNotificationCenter.defaultCenter()
     }
@@ -430,7 +430,7 @@ extension CardListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath == currentIndexPath {
-            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .Bottom)
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Bottom)
             currentDeck = fetchedResultsController.objectAtIndexPath(indexPath) as? Deck
             configureCell(cell, atIndexPath: indexPath)
         }

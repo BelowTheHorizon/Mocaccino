@@ -53,8 +53,8 @@ class CardDetailViewController: UIViewController {
         self.view.addSubview(self.visualEffectView)
         self.view.sendSubviewToBack(self.visualEffectView)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "isActiveChanged:", name: "CardListActiveStatusChange", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refetchNeedToReviewCards", name: UIApplicationWillEnterForegroundNotification, object: UIApplication.sharedApplication())
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CardDetailViewController.isActiveChanged(_:)), name: "CardListActiveStatusChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CardDetailViewController.refetchNeedToReviewCards), name: UIApplicationWillEnterForegroundNotification, object: UIApplication.sharedApplication())
     }
     
     override func viewWillDisappear(animated: Bool) {

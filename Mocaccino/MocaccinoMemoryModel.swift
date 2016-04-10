@@ -39,7 +39,7 @@ class MoccacinoMemoryModel {
         var currentPeriod = card.currentPeriod!.integerValue
         var memoryScore = card.memoryScore!.doubleValue
         
-        for (var dayPass = 0; dayPass < 365; dayPass++) {
+        for dayPass in 0 ..< 365 {
             if currentPeriod >= forgetScore.count {
                 currentPeriod = forgetScore.count - 1
             }
