@@ -33,7 +33,7 @@ class CardReviewViewController: UIViewController {
         cardBackView.frame = view.bounds
         cardBackView.backgroundColor = UIColor.clearColor()
         
-        let singleTap = UITapGestureRecognizer(target: self, action: Selector("tapped"))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(CardReviewViewController.tapped))
         singleTap.numberOfTapsRequired = 1
         cardFrontView.addGestureRecognizer(singleTap)
         
