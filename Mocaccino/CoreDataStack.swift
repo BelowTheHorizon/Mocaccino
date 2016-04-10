@@ -24,13 +24,13 @@ class CoreDataStack {
     private var ubiquitousChangesObserver: NSNotificationCenter? {
         didSet {
             oldValue?.removeObserver(self, name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: psc)
-            ubiquitousChangesObserver?.addObserver(self, selector: "persistentStoreDidimportUbiquitousContentChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: psc)
+            ubiquitousChangesObserver?.addObserver(self, selector: #selector(CoreDataStack.persistentStoreDidimportUbiquitousContentChanges(_:)), name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: psc)
             
             oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
-            ubiquitousChangesObserver?.addObserver(self, selector: "persistentStoreCoordinatorWillChangeStores:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
+            ubiquitousChangesObserver?.addObserver(self, selector: #selector(CoreDataStack.persistentStoreCoordinatorWillChangeStores(_:)), name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
             
             oldValue?.removeObserver(self, name: NSPersistentStoreCoordinatorStoresDidChangeNotification, object: psc)
-            ubiquitousChangesObserver?.addObserver(self, selector: "persistentStoreCoordinatorDidChangeStores:", name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
+            ubiquitousChangesObserver?.addObserver(self, selector: #selector(CoreDataStack.persistentStoreCoordinatorDidChangeStores(_:)), name: NSPersistentStoreCoordinatorStoresWillChangeNotification, object: psc)
         }
     }
     

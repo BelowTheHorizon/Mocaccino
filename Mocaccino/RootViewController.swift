@@ -150,7 +150,7 @@ extension RootViewController: SizeClassesAdaptor {
     // iPhone 6 and Before - Portrait
     func setWidthCompactHeightRegularLayoutWith(viewSize size: CGSize) {
         let frameRect = CGRectMake(0.0, 0.0, size.width, size.height)
-        let divideDistance = frameRect.height * 0.618
+        let divideDistance = CGFloat(Int(frameRect.height * 0.618))
         let cardDetailFrameRect = frameRect.divide(divideDistance, fromEdge: CGRectEdge.MinYEdge).remainder
 
         navigationController_CardListViewController.view.frame = frameRect

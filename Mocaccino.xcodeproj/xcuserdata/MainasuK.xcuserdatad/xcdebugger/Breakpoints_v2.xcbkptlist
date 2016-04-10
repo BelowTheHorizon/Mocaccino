@@ -51,6 +51,38 @@
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mocaccino.RootViewController.willTransitionToTraitCollection (__ObjC.UITraitCollection, withTransitionCoordinator : __ObjC.UIViewControllerTransitionCoordinator) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/RootViewController.swift"
+                  timestampString = "481989030.251672"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc Mocaccino.RootViewController.willTransitionToTraitCollection (__ObjC.UITraitCollection, withTransitionCoordinator : __ObjC.UIViewControllerTransitionCoordinator) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/RootViewController.swift"
+                  timestampString = "481989030.251959"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "124">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -76,6 +108,113 @@
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc Mocaccino.CardListViewController.isActive.setter : Swift.Bool"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardListViewController.swift"
+                  timestampString = "481989030.253619"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mocaccino.CardListViewController.(isActive.materializeForSet : Swift.Bool).(closure #1)"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardListViewController.swift"
+                  timestampString = "481989030.253908"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mocaccino.CardListViewController.viewWillAppear (Swift.Bool) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardListViewController.swift"
+                  timestampString = "481989030.254146"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "284">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc Mocaccino.CardListViewController.viewWillAppear (Swift.Bool) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardListViewController.swift"
+                  timestampString = "481989030.254363"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "300">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc Mocaccino.CardListViewController.controllerWillChangeContent (__ObjC.NSFetchedResultsController) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardListViewController.swift"
+                  timestampString = "481989030.254574"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc Mocaccino.CardListViewController.controllerDidChangeContent (__ObjC.NSFetchedResultsController) -&gt; ()"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardListViewController.swift"
+                  timestampString = "481989030.254786"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Mocaccino.CardListViewController.(persistentStoreDidChange (__ObjC.NSNotification) -&gt; ()).(closure #1)"
+                  moduleName = "Mocaccino"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/MainasuK/Documents/Xcode/Mocaccino/Mocaccino/CardListViewController.swift"
+                  timestampString = "481989030.255035"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "184">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -342,8 +481,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "158"
             endingLineNumber = "158"
-            landmarkName = "speak(_:)"
-            landmarkType = "5">
+            landmarkName = "CardReviewViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
