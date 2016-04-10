@@ -131,6 +131,7 @@ class CardReviewViewController: UIViewController {
     }
 }
 
+// MARK: - CardEventManager
 extension CardReviewViewController: CardEventManager {
     func rememberButtonPressed(card: Card) {
         let model = MoccacinoMemoryModel.shared

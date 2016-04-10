@@ -430,7 +430,7 @@ extension CardListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath == currentIndexPath {
-            tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .Bottom)
+            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Bottom)
             currentDeck = fetchedResultsController.objectAtIndexPath(indexPath) as? Deck
             configureCell(cell, atIndexPath: indexPath)
         }
